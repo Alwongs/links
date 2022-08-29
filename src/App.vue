@@ -1,30 +1,33 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
-  <router-view/>
+    <app-panel />
+    <div class="wrapper">
+        <app-aside />
+        <router-view />
+    </div>
+    <app-footer />
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import AppPanel from '@/components/AppPanel.vue'
+import AppAside from '@/components/AppAside.vue'
+import AppFooter from '@/components/AppFooter.vue'
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
+export default {
+    name: 'App',
+    components: {
+        AppPanel,
+        AppAside,
+        AppFooter,
     }
-  }
+}
+</script>
+
+<style lang="scss" scoped>
+
+.wrapper {
+    min-height: 200px;
+    height: calc(100vh - 128px);
+    background-color: rgb(111, 198, 130); 
+    display: flex;   
 }
 </style>
