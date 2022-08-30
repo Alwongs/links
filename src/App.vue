@@ -1,7 +1,7 @@
 <template>
     <app-panel />
     <div class="wrapper">
-        <app-aside />
+        <app-aside class="aside-block" />
         <router-view />
     </div>
     <app-footer />
@@ -27,7 +27,9 @@ export default {
 .wrapper {
     min-height: 200px;
     height: calc(100vh - 128px);
-    //background-color: rgb(111, 198, 130); 
     display: flex;   
+}
+.aside-block {
+    flex: 0 0 400px;
 }
 </style>

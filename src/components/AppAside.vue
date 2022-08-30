@@ -36,7 +36,6 @@ export default {
 
 .app-aside {
     background-color: rgb(207, 234, 223);
-    width: 400px;
     height: 100%;
     box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.2);
 }
