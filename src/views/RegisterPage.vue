@@ -7,7 +7,7 @@
         >
             {{ error }}
         </div>        
-        <div 
+        <form 
             class="form"
             @submit.prevent="signup"            
         >
@@ -40,7 +40,7 @@
                     Сохранить
                 </button>
             </div>
-        </div>
+        </form>
     </div>
 </template>
 
@@ -88,13 +88,12 @@ export default {
 <style lang="scss" scoped>
 
 .form {
-    margin: 0 auto;
-    width: 500px;
+
     @media (min-width: $desktop-min) and (max-width: $desktop-max) {
-        width: 400px; 
+        //width: 400px; 
     }     
     @media (min-width: $tablet-min) and (max-width: $tablet-max) {
-        width: 70%; 
+       //width: 70%; 
     }     
     @media (max-width: $mobile-max) {
         width: 100%; 
@@ -102,6 +101,7 @@ export default {
 }
 .title {
     font-size: 24px;
+    margin-bottom: 32px;
 }
 .input-list {
     margin-bottom: 16px;

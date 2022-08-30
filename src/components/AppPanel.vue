@@ -47,28 +47,11 @@ export default {
             return this.isUserAuthenticated
                 ? [
                 {
-                    title: 'О нас',
-                    route: '/about-page',
-                },
-                {
-                    title: 'События',
-                    route: '/post-list-page',
-                },
-                {
-                    title: 'Планирование',
-                    route: '/plan-page',
+                    title: 'Profile',
+                    route: '/profile-page',
                 },
             ] :
-            [
-                {
-                    title: 'О нас',
-                    route: '/about-page',
-                },  
-                {
-                    title: 'События',
-                    route: '/post-list-page',
-                },                              
-                /*
+            [                       
                 {
                     title: 'Вход',
                     route: '/login',
@@ -77,7 +60,7 @@ export default {
                     title: 'Регистрация',
                     route: '/register',
                 },
-                */
+
             ]            
         }
     },    
