@@ -21,7 +21,8 @@
 }
 html, body {
     //background-color: rgb(222, 230, 238);
-
+    font-family: 'Roboto';
+    color:rgb(0, 47, 64);
     height: 100%;
     font-size: 20px;
     @media (max-width: $mobile-max) {      
@@ -30,6 +31,7 @@ html, body {
 
 }
 .btn {
+    color:rgb(0, 47, 64);
     background-color: rgb(234, 242, 255);
     border: none;
     border-radius: 4px;

@@ -9,7 +9,7 @@
         </div>            
         <form 
             class="form" 
-            @submit.prevent="signin"
+            @submit.prevent="login"
         >
         
             <ul class="input-list">
@@ -71,9 +71,9 @@ export default {
         }                
     },
     methods: {
-        signin() {
+        login() {
             if (this.email && this.password) {
-                this.$store.dispatch('signIn',  {
+                this.$store.dispatch('login',  {
                     email: this.email, 
                     password: this.password
                 });

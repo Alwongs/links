@@ -39,7 +39,7 @@ export default {
     },
     actions: {
         initAuth({dispatch, commit, state}) {
-            return new Promise((resolve, /*reject*/) => {
+            return new Promise((resolve) => {
                 if (state.unsubscribeAuth) {
                     state.unsubscribeAuth();
                 }
@@ -51,7 +51,7 @@ export default {
                 commit('SET_UNSUBSCRIBE_AUTH', unsubscribe)
             })
         },
-        async signUp({commit}, {email, password}) {
+        async register({commit}, {email, password}) {
             commit('SET_PROCESSING', true);
             commit('CLEAR_ERROR');
             try {
@@ -62,7 +62,7 @@ export default {
                 commit('SET_ERROR', error.message);
             }       
         },
-        async signIn({commit}, {email, password}) {
+        async login({commit}, {email, password}) {
             commit('SET_PROCESSING', true);              
             commit('CLEAR_ERROR');            
             try {
@@ -73,7 +73,7 @@ export default {
                 commit('SET_ERROR', error.message);          
             }        
         },
-        async signOut() {
+        async logOut() {
             await signOut(auth);
         },
         stateChanged({commit}, payload) {

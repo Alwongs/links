@@ -2,7 +2,7 @@
     <div class="app-panel">
         <div class="panel-item">
             <router-link :to="'/'">
-                ЛАйК
+                Links
             </router-link>                         
         </div>
         <nav class="panel-item" :class="{active: isMenuOpen}">
@@ -72,7 +72,7 @@ export default {
     methods: {
         logout() {
             if (confirm('Вы уверены?')) {
-                this.$store.dispatch('signOut');
+                this.$store.dispatch('logOut');
                 this.$router.push('/'); 
                 this.isMenuOpen = false;                     
                 return                                      
@@ -82,11 +82,7 @@ export default {
         },
         goTo(path) {
             this.$router.push(path);
-            this.isMenuOpen = false;
-        },
-        toggleMenu() {
-            this.isMenuOpen = !this.isMenuOpen;
-        },       
+        },      
     }
 }
 </script>

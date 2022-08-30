@@ -9,7 +9,7 @@
         </div>        
         <form 
             class="form"
-            @submit.prevent="signup"            
+            @submit.prevent="register"            
         >
 
             <ul class="input-list">            
@@ -71,9 +71,9 @@ export default {
         }                
     },
     methods: {
-        signup() {
+        register() {
             if (this.email && this.password) {
-                this.$store.dispatch('signUp',  {
+                this.$store.dispatch('register',  {
                     email: this.email, 
                     password: this.password
                 });

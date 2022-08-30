@@ -27,7 +27,7 @@ export default {
 .wrapper {
     min-height: 200px;
     height: calc(100vh - 128px);
-    background-color: rgb(111, 198, 130); 
+    //background-color: rgb(111, 198, 130); 
     display: flex;   
 }
 </style>
