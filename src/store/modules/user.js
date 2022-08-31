@@ -52,24 +52,24 @@ export default {
             })
         },
         async register({commit}, {email, password}) {
-            commit('SET_PROCESSING', true);
+            commit('SET_LOADING', true);
             commit('CLEAR_ERROR');
             try {
                 await createUserWithEmailAndPassword(auth, email, password); 
-                commit('SET_PROCESSING', false);
+                commit('SET_LOADING', false);
             } catch (error) {
-                commit('SET_PROCESSING', false);
+                commit('SET_LOADING', false);
                 commit('SET_ERROR', error.message);
             }       
         },
         async login({commit}, {email, password}) {
-            commit('SET_PROCESSING', true);              
+            commit('SET_LOADING', true);              
             commit('CLEAR_ERROR');            
             try {
                 await signInWithEmailAndPassword(auth, email, password);
-                commit('SET_PROCESSING', false);
+                commit('SET_LOADING', false);
             } catch (error) {
-                commit('SET_PROCESSING', false);
+                commit('SET_LOADING', false);
                 commit('SET_ERROR', error.message);          
             }        
         },

@@ -2,12 +2,12 @@ import { initializeApp } from "firebase/app";
 import { getAuth } from 'firebase/auth'
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDr-e6pkTxomWPdA-31gc2isGUj3ISJRos",
-    authDomain: "links-note.firebaseapp.com",
-    projectId: "links-note",
-    storageBucket: "links-note.appspot.com",
-    messagingSenderId: "805363142242",
-    appId: "1:805363142242:web:aa699f8f4ae0fbd15b8b3b"
+    apiKey: "AIzaSyAT7RwpqqGClcHkBL91x9cf7J2iEeCh43w",
+    authDomain: "useful-link-list.firebaseapp.com",
+    projectId: "useful-link-list",
+    storageBucket: "useful-link-list.appspot.com",
+    messagingSenderId: "1085471896639",
+    appId: "1:1085471896639:web:2431325325cd64bf5d748a"
 }
 
 const app = initializeApp(firebaseConfig);
