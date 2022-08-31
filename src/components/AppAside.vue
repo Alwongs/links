@@ -1,5 +1,8 @@
 <template>
-    <aside class="app-aside">
+    <aside 
+        class="app-aside" 
+        :class="{active: isAsideOpen}"
+    >
         <h2 class="title">
             Caterories
         </h2>
@@ -28,7 +31,12 @@
 
 <script>
 export default {
-
+    name: 'AppAside',
+    computed: {
+        isAsideOpen() {
+            return this.$store.getters.isAsideOpen
+        }
+    }
 }
 </script>
 
@@ -38,11 +46,29 @@ export default {
     background-color: rgb(207, 234, 223);
     height: 100%;
     box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.2);
+    @media (max-width: $mobile-max) {
+        
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        
+        transition: 0.4s;
+        transform: translateX(-100%);  
+        &.active {
+            transform: translateX(0%);
+        }              
+    }      
 }
 .title {
     font-weight: 500;
     text-align: center;
     padding: 32px 0;
+    @media (max-width: $mobile-max) {
+        padding: 16px 0;          
+    }      
 }
 .category-list {
     margin-bottom: 32px;

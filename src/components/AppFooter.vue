@@ -1,6 +1,6 @@
 <template>
     <div class="app-footer">
-        footer
+        footer 2022
     </div>
 </template>
 
@@ -15,6 +15,9 @@ export default {
 .app-footer {
     background-color: rgb(58, 138, 182);
     height: 64px;
+    line-height: 64px;
     width: 100%;
+    text-align: center;
+    color: white;
 }
 </style>

@@ -5,7 +5,8 @@
                 Links
             </router-link>                         
         </div>
-        <nav class="panel-item" :class="{active: isMenuOpen}">
+
+        <nav class="panel-item" :class="{active: isAsideOpen}">
             <ul class="nav-list">
                 <li 
                     v-for="item in menuItems"
@@ -26,13 +27,13 @@
                 >
                     Выйти
                 </li>
-            </ul>     
+            </ul>  
+            <div 
+                class="menu-btn" 
+                :class="{opened: isAsideOpen}"
+                @click="toggleMenu"
+            ></div>               
         </nav>
-        <div 
-            class="menu-btn" 
-            :class="{opened: isMenuOpen}"
-            @click="toggleMenu"
-        ></div>
     </div>
 </template>
 
@@ -42,7 +43,10 @@ export default {
     computed: {
         isUserAuthenticated() {
             return this.$store.getters.isUserAuthenticated;
-        },         
+        },  
+        isAsideOpen() {
+            return this.$store.getters.isAsideOpen
+        },               
         menuItems() {
             return this.isUserAuthenticated
                 ? [
@@ -66,10 +70,13 @@ export default {
     },    
     data() {
         return {
-            isMenuOpen: false
+
         }
     },
     methods: {
+        toggleMenu() {
+            this.$store.commit('TOGGLE_ASIDE')
+        },
         logout() {
             if (confirm('Вы уверены?')) {
                 this.$store.dispatch('logOut');
@@ -106,7 +113,7 @@ export default {
 }
 
 .panel-item {
-
+    display: flex;
 }
 
 .nav-wrap {
@@ -129,8 +136,8 @@ export default {
 .nav-list {
     display: flex;
     @media (max-width: $mobile-max) {
-        font-size: 28px;
-        flex-direction: column;
+        font-size: 22px;
+        //flex-direction: column;
     }         
 }
 .nav-item {
@@ -148,7 +155,7 @@ export default {
         display: block;
         z-index: 2;        
         cursor: pointer;
-        position: absolute;
+        //position: absolute;
         content: '';
         width: 32px;
         height: 32px;

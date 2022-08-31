@@ -1,19 +1,26 @@
 export default {
     getters: {
-        getProcessing(state) {
-            return state.processing
+        getLoading(state) {
+            return state.loading
         }, 
         getError(state) {
             return state.error
+        }, 
+        isAsideOpen(state) {
+            return state.isAsideOpen
         } 
     },
     state: {
-        processing: false,
-        error: null
+        loading: false,
+        error: null,
+        isAsideOpen: false
     },
     mutations: {
-        SET_PROCESSING(state, payload) {
-            state.processing = payload;
+        TOGGLE_ASIDE(state) {
+            state.isAsideOpen = !state.isAsideOpen;
+        },
+        SET_LOADING(state, payload) {
+            state.loading = payload;
         },
         SET_ERROR(state, payload) {
             state.error = payload;

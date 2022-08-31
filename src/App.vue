@@ -1,9 +1,11 @@
 <template>
     <app-panel />
+
     <div class="wrapper">
         <app-aside class="aside-block" />
         <router-view />
     </div>
+    
     <app-footer />
 </template>
 
@@ -25,6 +27,7 @@ export default {
 <style lang="scss" scoped>
 
 .wrapper {
+    position: relative;
     min-height: 200px;
     height: calc(100vh - 128px);
     display: flex;   
