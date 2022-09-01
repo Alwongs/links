@@ -1,9 +1,10 @@
 <template>
     <div class="app-panel">
-        <div class="panel-item">
-            <router-link :to="'/'">
-                Links
-            </router-link>                         
+        <div 
+            class="panel-item home-link" 
+            @click="$router.push({name: 'home'})"
+        >
+            Links                        
         </div>
 
         <nav class="panel-item" :class="{active: isAsideOpen}">
@@ -114,6 +115,9 @@ export default {
 
 .panel-item {
     display: flex;
+}
+.home-link {
+    cursor: pointer;
 }
 
 .nav-wrap {

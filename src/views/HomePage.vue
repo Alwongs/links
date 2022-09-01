@@ -1,5 +1,9 @@
 <template>
     <div class="app-page">
+        <h1 class="title">Home Page</h1>
+
+
+
         <app-categories class="home-page-categories" />
     </div>
 
@@ -9,11 +13,20 @@
 import AppCategories from '@/components/categories/AppCategories.vue'
 
 export default {
-  components: { AppCategories },
-
-  name: 'HomePage',
+    name: 'HomePage',
+    components: { AppCategories },
+    computed: {
+        loading() {
+            return this.$store.getters.getLoading            
+        },        
+        getCategoryList() {
+            return this.$store.getters.getCategoryList
+        },
+    },   
     async mounted() {
-        await this.$store.dispatch('getCategoryList')
+        if (!this.getCategoryList.length) {
+            await this.$store.dispatch('getCategoryList') 
+        } 
     } 
 }
 </script>
@@ -25,4 +38,10 @@ export default {
         display: none;             
     }    
 }
+.title {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+
 </style>

@@ -55,12 +55,15 @@ export default {
         },
         isAsideOpen() {
             return this.$store.getters.isAsideOpen
-        }
+        },
+        getCategoryList() {
+            return this.$store.getters.getCategoryList
+        },        
     },
     methods: {
         showCategory(category) {
             this.$store.commit('UPDATE_CATEGORY', category);
-            this.$router.push({name: 'links-page'})
+            this.$router.push({name: 'links-page', params: {id: category.id}})
         },
         async saveCategory() {
             await this.$store.dispatch('saveCategory', {
@@ -68,12 +71,11 @@ export default {
             })
             this.categoryName = ''
         },
-        async getCategoryList() {
-            await this.$store.dispatch('getCategoryList')
-        }
     },
     async mounted() {
-        await this.$store.dispatch('getCategoryList')
+        if (!this.getCategoryList.length) {
+            await this.$store.dispatch('getCategoryList') 
+        } 
     }
 }
 </script>

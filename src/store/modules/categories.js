@@ -1,4 +1,4 @@
-import { getDatabase, set, ref, child, get, /*update, remove*/ } from "firebase/database"
+import { getDatabase, set, ref, child, get, update, /*remove*/ } from "firebase/database"
 
 export default {
     getters: {
@@ -22,6 +22,39 @@ export default {
         },
     },
     actions: {
+        async updateCategory({getters, commit}, category) {
+            try {              
+                const db = getDatabase();
+                const uid = getters.userId;
+
+                const updates = {};
+                updates[`${uid}/categories/${category.id}`] = category;
+
+                return await update(ref(db), updates);
+            } catch (e) {
+                commit('SET_ERROR', e)
+                throw e                
+            }                
+        },
+        async getCategory({getters, commit}, id) { 
+            commit('SET_LOADING', true);
+            const dbRef = ref(getDatabase());
+
+            const uid = getters.userId;             
+
+            await get(child(dbRef, `${uid}/categories/${id}`)).then((data) => {
+                if (data.exists()) {
+                    const category = data.val()                      
+                    commit('UPDATE_CATEGORY', category);
+                    commit('SET_LOADING', false);
+                } else {
+                    commit('UPDATE_CATEGORY', {})
+                    commit('SET_LOADING', false);
+                }
+            }).catch((error) => {
+                console.error(error);
+            });
+        },        
         async getCategoryList({getters, commit}) { 
             commit('SET_LOADING', true);
             const dbRef = ref(getDatabase());
