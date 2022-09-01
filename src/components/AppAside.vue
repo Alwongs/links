@@ -16,7 +16,10 @@ export default {
         isAsideOpen() {
             return this.$store.getters.isAsideOpen
         }
-    }
+    },
+    async mounted() {
+        await this.$store.dispatch('getCategoryList')
+    }    
 }
 </script>
 

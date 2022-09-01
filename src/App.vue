@@ -20,7 +20,7 @@ export default {
         AppPanel,
         AppAside,
         AppFooter,
-    }
+    },
 }
 </script>
 

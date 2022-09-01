@@ -5,13 +5,20 @@ export default {
         getCategoryList(state) {
             return state.categoryList;
         },
+        getCategory(state) {
+            return state.category;
+        },
     },
     state: {
         categoryList: [],
+        category: {}
     },
     mutations: {
         UPDATE_CATEGORY_LIST(state, payload) {
             state.categoryList = payload
+        },
+        UPDATE_CATEGORY(state, payload) {
+            state.category = payload
         },
     },
     actions: {

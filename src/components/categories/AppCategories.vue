@@ -18,7 +18,7 @@
             >
             <input 
                 type="submit" 
-                value="Add" 
+                value="Save" 
                 class="submit"
             >           
         </form>
@@ -29,6 +29,7 @@
                 v-for="category in categoryList" 
                 :key="category.id"
                 class="category-item"
+                @click="showCategory(category)"
             >
                 {{ category.name }}
             </li>
@@ -57,6 +58,10 @@ export default {
         }
     },
     methods: {
+        showCategory(category) {
+            this.$store.commit('UPDATE_CATEGORY', category);
+            this.$router.push({name: 'links-page'})
+        },
         async saveCategory() {
             await this.$store.dispatch('saveCategory', {
                 name: this.categoryName
@@ -68,7 +73,7 @@ export default {
         }
     },
     async mounted() {
-        //await this.getCategoryList()
+        await this.$store.dispatch('getCategoryList')
     }
 }
 </script>
@@ -106,7 +111,10 @@ export default {
         }
     }    
 }
-
+input::placeholder { /* Most modern browsers support this now. */
+   color:    rgb(127, 127, 127);
+   font-size: 18px;
+}
 
 
 
@@ -116,6 +124,7 @@ export default {
 .category-item {
     padding: 16px 32px;
     border-bottom: 1px solid rgba(136, 136, 136, 0.3);
+    cursor: pointer;
     &:hover {
         background-color: rgb(233, 255, 246);
     }    
