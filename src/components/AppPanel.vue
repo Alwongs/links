@@ -107,6 +107,12 @@ export default {
     color: rgb(255, 225, 92);
     height: 64px;
     padding: 0 32px;    
+    @media (min-width: $desktop-min) and (max-width: $desktop-max) {
+        padding: 0 16px;
+    }     
+    @media (min-width: $tablet-min) and (max-width: $tablet-max) {
+        padding: 0 16px;
+    } 
     @media (max-width: $mobile-max) {
         padding: 0 16px;
         font-size: 22px;

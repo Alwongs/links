@@ -7,7 +7,7 @@
         </h2>
 
         <form 
-            class="input-block"
+            class="form"
             @submit.prevent="saveCategory"
         >
             <input 
@@ -63,6 +63,7 @@ export default {
     methods: {
         showCategory(category) {
             this.$store.commit('UPDATE_CATEGORY', category);
+            this.$store.commit('UPDATE_LINK_LIST', category.links);
             this.$router.push({name: 'links-page', params: {id: category.id}})
         },
         async saveCategory() {
@@ -86,16 +87,22 @@ export default {
     font-weight: 500;
     text-align: center;
     padding: 32px 0;
+    @media (min-width: $desktop-min) and (max-width: $desktop-max) {
+        padding: 16px 0;
+    }     
+    @media (min-width: $tablet-min) and (max-width: $tablet-max) {
+        padding: 16px 0;
+    }     
     @media (max-width: $mobile-max) {
         padding: 16px 0;          
     }      
 }
 
 
-.input-block {
+.form {
     display: flex;
     padding: 0 32px;
-    height: 44px;
+    height: 38px;
     margin-bottom: 16px;
     input {
         font-size: 22px;        
@@ -111,11 +118,32 @@ export default {
         &:hover {
             background-color: #fff;
         }
-    }    
+        @media (min-width: $tablet-min) and (max-width: $tablet-max) {
+            font-size: 16px;
+        }     
+        @media (max-width: $mobile-max) {
+            font-size: 16px;        
+        }         
+    } 
+    @media (min-width: $desktop-min) and (max-width: $desktop-max) {
+        padding: 0 16px;
+    }     
+    @media (min-width: $tablet-min) and (max-width: $tablet-max) {
+        padding: 0 16px;
+    }     
+    @media (max-width: $mobile-max) {
+        padding: 0 16px;         
+    }     
 }
 input::placeholder { /* Most modern browsers support this now. */
    color:    rgb(127, 127, 127);
    font-size: 18px;
+    @media (min-width: $tablet-min) and (max-width: $tablet-max) {
+        font-size: 16px;
+    }     
+    @media (max-width: $mobile-max) {
+        font-size: 16px;        
+    }    
 }
 
 
@@ -129,6 +157,15 @@ input::placeholder { /* Most modern browsers support this now. */
     cursor: pointer;
     &:hover {
         background-color: rgb(233, 255, 246);
-    }    
+    }  
+    @media (min-width: $desktop-min) and (max-width: $desktop-max) {
+        padding: 16px;
+    }     
+    @media (min-width: $tablet-min) and (max-width: $tablet-max) {
+        padding: 12px;
+    }     
+    @media (max-width: $mobile-max) {
+        padding: 12px;         
+    }       
 }
 </style>

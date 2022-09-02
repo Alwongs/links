@@ -34,5 +34,14 @@ export default {
 }
 .aside-block {
     flex: 0 0 400px;
+    @media (min-width: $desktop-min) and (max-width: $desktop-max) {
+        flex: 0 0 350px;
+    }     
+    @media (min-width: $tablet-min) and (max-width: $tablet-max) {
+        flex: 0 0 250px;
+    }     
+    @media (max-width: $mobile-max) {
+        width: 100%; 
+    } 
 }
 </style>
