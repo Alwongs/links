@@ -65,17 +65,17 @@ export default {
 <style lang="scss" scoped>
 
 .form {
-    padding: 0 32px;
+    width: 50%;
     margin: 0 auto;
+    margin-bottom: 32px;
     @media (min-width: $desktop-min) and (max-width: $desktop-max) {
-        //width: 75%;
-        padding: 0 16px;
+        width: 75%;
     }     
     @media (min-width: $tablet-min) and (max-width: $tablet-max) {
-        padding: 0 16px;
+        width: 90%;
     }     
     @media (max-width: $mobile-max) {
-        padding: 0 16px;         
+        width: 100%; 
     }       
 }
 .input-item {

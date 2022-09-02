@@ -1,5 +1,5 @@
 <template>
-    <div class="app-page">
+    <div class="app-page border-red">
         <p v-if="loading" class="loading">Загрузка...</p>         
         <h1 class="title">
             {{ getCategory.name }}
@@ -11,9 +11,21 @@
             <li 
                 v-for="link in getLinkList" 
                 :key="link.id"
+                class="link-item"
             >
-                <a :href="link.src">- {{ link.title }}</a>
-                
+                <a 
+                    target="_blank"
+                    :href="link.src"
+                    class="link-name"
+                >
+                    - {{ link.title }}
+                </a>
+                <button 
+                    class="btn-delete"
+                    @click="deleteLink(link.id)"
+                >
+                    &times;
+                </button>
             </li>
         </ul>
     </div>
@@ -32,7 +44,6 @@ export default {
             categoryId: this.$route.params.id,
         }
     },
-
     computed: {
         loading() {
             return this.$store.getters.getLoading            
@@ -43,6 +54,11 @@ export default {
         getLinkList() {
             return this.$store.getters.getLinkList
         },
+    },
+    methods: {
+        async deleteLink(id) {
+            await this.$store.dispatch('deleteLink', id)
+        }
     },
     async mounted() {
         if (!this.$store.getters.getCategoryList.length) {
@@ -60,6 +76,46 @@ export default {
     margin-bottom: 16px;
 }
 .link-list {
-
+    width: 50%;
+    margin: 0 auto;
+    @media (min-width: $desktop-min) and (max-width: $desktop-max) {
+        width: 75%;
+    }     
+    @media (min-width: $tablet-min) and (max-width: $tablet-max) {
+        width: 90%;
+    }     
+    @media (max-width: $mobile-max) {
+        width: 100%; 
+    }     
+}
+.link-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    .link-name {
+        flex: 1 1 auto;
+        cursor: pointer;        
+        &:hover  {
+            color: red;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }         
+    }    
+    button {
+        font-size: 22px;
+        width: 30px;
+        height: 30px;
+        color:red;
+        background-color: rgb(255, 229, 229);
+        border: 1px solid rgba(255, 67, 67, 0.7);
+        border-radius: 50%;
+        box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.5);
+        cursor: pointer;
+        &:hover  {
+            color: white;
+            background-color: rgb(234, 91, 91);
+            border: 1px solid red;
+            box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.5);            
+        }         
+    } 
 }
 </style>

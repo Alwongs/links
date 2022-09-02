@@ -1,4 +1,4 @@
-import { getDatabase, set, ref, child, get, /*update, /*remove*/ } from "firebase/database"
+import { getDatabase, set, ref, child, get, /*update, /**/remove } from "firebase/database"
 
 export default {
     getters: {
@@ -22,11 +22,18 @@ export default {
         },
     },
     actions: {
+        async deleteCategory({getters, commit, dispatch}, id) {
+            commit('SET_LOADING', true);            
+            const db = getDatabase();
+            const uid = getters.userId;             
 
+            await remove(ref(db, `${uid}/categories/${id}`));
+            await dispatch('getCategoryList');
+            commit('SET_LOADING', false);
+        },
         async getCategory({getters, commit}, id) { 
             commit('SET_LOADING', true);
             const dbRef = ref(getDatabase());
-
             const uid = getters.userId;             
 
             await get(child(dbRef, `${uid}/categories/${id}`)).then((data) => {
@@ -48,7 +55,6 @@ export default {
         async getCategoryList({getters, commit}) { 
             commit('SET_LOADING', true);
             const dbRef = ref(getDatabase());
-
             const uid = getters.userId;            
 
             await get(child(dbRef, `${uid}/categories`)).then((data) => {
@@ -69,11 +75,11 @@ export default {
         async saveCategory({getters, commit, dispatch}, category) { 
             commit('SET_LOADING', true);            
             const db = getDatabase();
-
             const uid = getters.userId;
-            const categoryId = Date.now();
-            category.id = categoryId
-            await set(ref(db, `${uid}/categories/${categoryId}`), category);
+            //const categoryId = Date.now()
+            category.id = Date.now()
+
+            await set(ref(db, `${uid}/categories/${category.id}`), category);
 
             dispatch('getCategoryList'); 
             commit('SET_LOADING', false);            

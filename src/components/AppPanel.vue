@@ -23,7 +23,7 @@
                 </li>
                 <li 
                     v-if="isUserAuthenticated"
-                    class="nav-item"
+                    class="nav-item border-red"
                     @click="logout()"
                 >
                     Выйти

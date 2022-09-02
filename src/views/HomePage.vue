@@ -1,20 +1,17 @@
 <template>
     <div class="app-page">
-        <h1 class="title">Home Page</h1>
-
-
-
-        <app-categories class="home-page-categories" />
+        <h1 class="title">Manage your useful links..</h1>
+        <category-list v-if="!isAsideOpen" class="home-page-categories" />
     </div>
 
 </template>
 
 <script>
-import AppCategories from '@/components/categories/AppCategories.vue'
+import CategoryList from '@/components/categories/CategoryList.vue'
 
 export default {
     name: 'HomePage',
-    components: { AppCategories },
+    components: { CategoryList },
     computed: {
         loading() {
             return this.$store.getters.getLoading            
@@ -22,6 +19,9 @@ export default {
         getCategoryList() {
             return this.$store.getters.getCategoryList
         },
+        isAsideOpen() {
+            return this.$store.getters.isAsideOpen
+        }        
     },   
     async mounted() {
         if (!this.getCategoryList.length) {

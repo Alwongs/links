@@ -1,4 +1,4 @@
-import { getDatabase, set, ref, child, get, /*update, remove*/ } from "firebase/database"
+import { getDatabase, set, ref, child, get, /*update,*/ remove } from "firebase/database"
 
 export default {
     getters: {
@@ -15,6 +15,16 @@ export default {
         },
     },
     actions: {
+        async deleteLink({getters, commit, dispatch}, id) {
+            commit('SET_LOADING', true);            
+            const db = getDatabase();
+            const uid = getters.userId;             
+            const catId = getters.getCategory.id
+            await remove(ref(db, `${uid}/categories/${catId}/links/${id}`));
+            await dispatch('getLinkList', catId);
+            commit('SET_LOADING', false);
+        },   
+
         async saveLink({getters, commit}, link) {
             commit('SET_LOADING', true);
             const db = getDatabase();

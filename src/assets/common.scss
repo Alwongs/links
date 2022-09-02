@@ -44,12 +44,12 @@ html, body {
 
 .app-page {
     flex: 1 1 auto;
-    padding: 64px;
+    padding: 32px;
     @media (min-width: $desktop-min) and (max-width: $desktop-max) {
-        padding: 32px;
+        padding: 16px;
     }     
     @media (min-width: $tablet-min) and (max-width: $tablet-max) {
-        padding: 32px;
+        padding: 16px;
     }     
     @media (max-width: $mobile-max) {
         padding: 16px;         
