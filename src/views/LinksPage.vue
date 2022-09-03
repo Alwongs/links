@@ -1,11 +1,12 @@
 <template>
-    <div class="app-page border-red">
-        <p v-if="loading" class="loading">Загрузка...</p>         
+    <div class="app-page">
+        <p v-if="loading" class="loading">Загрузка...</p> 
+
+        <create-link />                
         <h1 class="title">
             {{ getCategory.name }}
         </h1>
 
-        <create-link />
 
         <ul class="link-list">
             <li 
@@ -14,15 +15,18 @@
                 class="link-item"
             >
                 <a 
+                    id="link"
                     target="_blank"
                     :href="link.src"
                     class="link-name"
                 >
                     - {{ link.title }}
                 </a>
+                <div class="flex-divider"></div>
                 <button 
+                    id="button"
                     class="btn-delete"
-                    @click="deleteLink(link.id)"
+                    @click="deleteLink(link)"
                 >
                     &times;
                 </button>
@@ -56,8 +60,10 @@ export default {
         },
     },
     methods: {
-        async deleteLink(id) {
-            await this.$store.dispatch('deleteLink', id)
+        async deleteLink(link) {
+            if (confirm(`Delete "${link.title}"`)) {
+                await this.$store.dispatch('deleteLink', link.id)
+            }
         }
     },
     async mounted() {
@@ -72,6 +78,7 @@ export default {
 <style lang="scss" scoped>
 
 .title {
+    font-size: 28px;    
     text-align: center;
     margin-bottom: 16px;
 }
@@ -93,13 +100,18 @@ export default {
     justify-content: space-between;
     margin-bottom: 16px;
     .link-name {
-        flex: 1 1 auto;
+        margin-right: 8px;
         cursor: pointer;        
         &:hover  {
             color: red;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-        }         
-    }    
+        }       
+    }   
+    .flex-divider      {
+        flex: 1 1 auto;        
+        border-bottom: 1px dotted grey;   
+        margin-right: 8px;             
+    }
     button {
         font-size: 22px;
         width: 30px;
@@ -115,7 +127,7 @@ export default {
             background-color: rgb(234, 91, 91);
             border: 1px solid red;
             box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.5);            
-        }         
+        }        
     } 
 }
 </style>

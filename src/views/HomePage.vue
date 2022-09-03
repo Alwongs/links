@@ -1,17 +1,32 @@
 <template>
     <div class="app-page">
-        <h1 class="title">Manage your useful links..</h1>
-        <category-list v-if="!isAsideOpen" class="home-page-categories" />
+        <h1 class="title">
+            Manage your useful links..
+        </h1>
+        <div class="create-category-wrap">
+            <create-category /> 
+        </div>
+
+           
+       
+        <category-list 
+            v-if="!isAsideOpen" 
+            class="home-page-categories" 
+        />
     </div>
 
 </template>
 
 <script>
+import CreateCategory from '@/components/categories/CreateCategory.vue'
 import CategoryList from '@/components/categories/CategoryList.vue'
 
 export default {
     name: 'HomePage',
-    components: { CategoryList },
+    components: { 
+        CategoryList, 
+        CreateCategory 
+    },
     computed: {
         loading() {
             return this.$store.getters.getLoading            
@@ -39,9 +54,17 @@ export default {
     }    
 }
 .title {
+    font-size: 28px;
     text-align: center;
-    margin-bottom: 16px;
+    margin-bottom: 32px;
+    @media (max-width: $mobile-max) {
+        display: none;             
+    }        
 }
-
+.create-category-wrap {
+    @media (min-width: $mobile-max) {
+        display: none;             
+    }     
+}
 
 </style>

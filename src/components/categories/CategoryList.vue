@@ -22,7 +22,7 @@
                     class="btn-delete"
                     @click="deleteCategory(category.id)"
                 >
-                    &times;
+                    Del
                 </button>
             </li>
         </ul>
@@ -61,6 +61,7 @@ export default {
             this.$store.commit('UPDATE_CATEGORY', category);
             this.$store.commit('UPDATE_LINK_LIST', category.links);
             this.$router.push({name: 'links-page', params: {id: category.id}})
+            this.$store.commit('CLOSE_ASIDE')            
         },
         async saveCategory() {
             await this.$store.dispatch('saveCategory', {
@@ -80,17 +81,19 @@ export default {
 <style lang="scss" scoped>
 
 .title {
+    font-size: 24px;
     font-weight: 500;
     text-align: center;
-    margin-bottom: 32px;
+    padding: 32px 0 8px 0;
+    //margin-bottom: 32px;
     @media (min-width: $desktop-min) and (max-width: $desktop-max) {
-        margin-bottom: 16px;
+        //margin-bottom: 16px;
     }     
     @media (min-width: $tablet-min) and (max-width: $tablet-max) {
-        margin-bottom: 16px;
+        //margin-bottom: 16px;
     }     
     @media (max-width: $mobile-max) {
-        margin-bottom: 16px;         
+        //margin-bottom: 16px;         
     }      
 }
 .category-list {
@@ -119,11 +122,12 @@ export default {
         }         
     }
     button {
-        font-size: 22px;
+        font-size: 12px;
+        font-weight: 500;
         width: 30px;
         height: 30px;
         color:red;
-        background-color: rgb(255, 229, 229);
+        background-color: rgb(255, 237, 237);
         border: 1px solid rgba(255, 67, 67, 0.7);
         border-radius: 50%;
         box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.5);

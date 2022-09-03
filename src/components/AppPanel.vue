@@ -23,7 +23,7 @@
                 </li>
                 <li 
                     v-if="isUserAuthenticated"
-                    class="nav-item border-red"
+                    class="nav-item"
                     @click="logout()"
                 >
                     Выйти
@@ -98,6 +98,7 @@ export default {
 <style lang="scss" scoped>
 
 .app-panel {
+    z-index: 2;
     position: sticky;
     background-color: rgb(58, 138, 182);
     box-shadow: 0 2px 2px 0 rgba(10, 13, 61, 0.4);

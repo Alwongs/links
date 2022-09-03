@@ -1,5 +1,14 @@
 <template>
-    <form 
+    <p 
+        v-if="!isFormOpen"
+        href="#" 
+        class="form-trigger"
+        @click="isFormOpen = true"
+    >
+        Add new category
+    </p>
+    <form  
+        v-if="isFormOpen"
         class="form"
         @submit.prevent="saveCategory"
     >
@@ -9,13 +18,12 @@
                     v-model="categoryName" 
                     type="text" 
                     placeholder="add new category.."
-                    required
                 >
             </li>
             <li class="input-item">
                 <input 
                     type="submit" 
-                    value="Save" 
+                    :value="btnTitle" 
                     class="submit"
                 >  
             </li>
@@ -29,20 +37,29 @@ export default {
     name: 'CategoryList',
     data() {
         return {
-            categoryName: ''
+            isFormOpen: false,            
+            categoryName: '',
         }
     },
     computed: {
         loading() {
             return this.$store.getters.getLoading            
-        }       
+        },   
+        btnTitle() {
+            return this.categoryName ? 'Save' : 'Close'
+        }    
     },
     methods: {
         async saveCategory() {
+            if (!this.categoryName) {
+                this.isFormOpen = false
+                return
+            }
             await this.$store.dispatch('saveCategory', {
                 name: this.categoryName
             })
             this.categoryName = ''
+            this.isFormOpen = false
         }
     }
 }
@@ -50,19 +67,35 @@ export default {
 
 <style lang="scss" scoped>
 
+.form-trigger {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 38px;
+    line-height: 38px;
+    border-radius: 0 0 10px 0;
+    background-color: rgba(255, 233, 206, 0.7);
+    box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.3);
+    
+    color: rgb(18, 72, 189);
+    font-size: 16px;
+    padding: 0 12px;
+    margin-bottom: 16px;
+    cursor: pointer;
+}
 .form {
     display: flex;
-    padding: 0 32px;
-    margin-bottom: 16px;
-
+    padding: 32px;
+    background-color: rgba(255, 233, 206, 0.7);
+    box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.3);    
     @media (min-width: $desktop-min) and (max-width: $desktop-max) {
-        padding: 0 16px;
+        padding: 16px;
     }     
     @media (min-width: $tablet-min) and (max-width: $tablet-max) {
-        padding: 0 16px;
+        padding: 16px;
     }     
     @media (max-width: $mobile-max) {
-        padding: 0 16px;         
+        padding: 32px;         
     }     
 }
 .input-list {
@@ -80,14 +113,16 @@ export default {
 }
 .input-item {
     height: 38px;
+    &:not(:last-child) {
+        margin-bottom: 8px;
+    }
     @media (min-width: $tablet-min) and (max-width: $tablet-max) {
         flex-direction: column; 
         width: 100%;  
-        margin: 0 auto;
-        margin-bottom: 8px;        
+        margin: 0 auto;  
     }     
     @media (max-width: $mobile-max) {
-        margin-bottom: 8px;
+        height: 44px;
     }     
 }
 input {

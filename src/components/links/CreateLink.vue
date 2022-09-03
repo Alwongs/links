@@ -1,5 +1,14 @@
 <template>
+    <p 
+        v-if="!isFormOpen"
+        href="#" 
+        class="form-trigger"
+        @click="isFormOpen = true"
+    >
+        Add new link
+    </p>
     <form 
+        v-if="isFormOpen"    
         class="form"
         @submit.prevent="saveLink"
     >
@@ -9,7 +18,6 @@
                     v-model="link.title" 
                     type="text" 
                     placeholder="link title.."
-                    required
                 >
             </li>
             <li class="input-item">
@@ -17,15 +25,14 @@
                     v-model="link.src" 
                     type="text" 
                     placeholder="link src.."
-                    required
                 >
             </li>
             <li class="input-item submit-item">
-                <button 
+                <input 
                     type="submit" 
-                    value="Save" 
+                    :value="btnTitle" 
                     class="submit"
-                >Save</button>
+                >
             </li>
         </ul>
     </form> 
@@ -36,6 +43,7 @@ export default {
     name: 'CreateLink',
     data() {
         return {
+            isFormOpen: false, 
             categoryId: this.$route.params.id,
             link: {
                 title: '',
@@ -50,9 +58,21 @@ export default {
         getLinkList() {
             return this.$store.getters.getLinkList
         },
+        btnTitle() {
+            if (this.link.title && this.link.src) {
+                return 'Save'
+            } else {
+                return 'Close'
+            }
+
+        }         
     },
     methods: {
         async saveLink() {
+            if (!this.link.title || !this.link.src) {
+                this.isFormOpen = false
+                return
+            }            
             await this.$store.dispatch('saveLink', this.link)
             await this.$store.dispatch('getLinkList', this.categoryId); 
             this.link.title = ''
@@ -64,6 +84,23 @@ export default {
 
 <style lang="scss" scoped>
 
+.form-trigger {
+    color: rgb(18, 72, 189);
+    font-size: 15px;
+    margin-bottom: 32px;
+    cursor: pointer;
+    width: 50%;
+    margin: 0 auto;
+    @media (min-width: $desktop-min) and (max-width: $desktop-max) {
+        width: 75%;
+    }     
+    @media (min-width: $tablet-min) and (max-width: $tablet-max) {
+        width: 90%;
+    }     
+    @media (max-width: $mobile-max) {
+        width: 100%; 
+    }     
+}
 .form {
     width: 50%;
     margin: 0 auto;

@@ -16,6 +16,9 @@ export default {
         isAsideOpen: false
     },
     mutations: {
+        CLOSE_ASIDE(state) {
+            state.isAsideOpen = false;
+        },
         TOGGLE_ASIDE(state) {
             state.isAsideOpen = !state.isAsideOpen;
         },
