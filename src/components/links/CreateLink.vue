@@ -1,23 +1,25 @@
 <template>
     <p 
-        v-if="!isFormOpen"
+        v-if="!isAsideOpen"
         href="#" 
         class="form-trigger"
-        @click="isFormOpen = true"
+        @click="toggleForm"
     >
-        Add new link
+        {{ !isFormOpen ? 'New link' : 'Close' }}
     </p>
-    <form 
-        v-if="isFormOpen"    
+    <form    
         class="form"
+        :class="{active: isFormOpen}"
         @submit.prevent="saveLink"
     >
+
         <ul class="input-list">
             <li class="input-item">
                 <input 
                     v-model="link.title" 
                     type="text" 
                     placeholder="link title.."
+                    required
                 >
             </li>
             <li class="input-item">
@@ -25,12 +27,13 @@
                     v-model="link.src" 
                     type="text" 
                     placeholder="link src.."
+                    required                    
                 >
             </li>
             <li class="input-item submit-item">
                 <input 
                     type="submit" 
-                    :value="btnTitle" 
+                    value="Save" 
                     class="submit"
                 >
             </li>
@@ -58,18 +61,16 @@ export default {
         getLinkList() {
             return this.$store.getters.getLinkList
         },
-        btnTitle() {
-            if (this.link.title && this.link.src) {
-                return 'Save'
-            } else {
-                return 'Close'
-            }
-
-        }         
+        isAsideOpen() {
+            return this.$store.getters.isAsideOpen
+        }       
     },
     methods: {
+        toggleForm() {
+            this.isFormOpen = !this.isFormOpen
+        },
         async saveLink() {
-            if (!this.link.title || !this.link.src) {
+            if (this.link.title === '' || this.link.src === '') {
                 this.isFormOpen = false
                 return
             }            
@@ -85,26 +86,47 @@ export default {
 <style lang="scss" scoped>
 
 .form-trigger {
+    z-index: 3;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 34px;
+    line-height: 34px;
+    border-radius: 0 0 10px 0;
+    background-color: rgba(255, 233, 206, 0.7);
+    box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.3);
     color: rgb(18, 72, 189);
-    font-size: 15px;
-    margin-bottom: 32px;
+    font-size: 16px;
+    padding: 0 12px;
+    margin-bottom: 16px;
     cursor: pointer;
-    width: 50%;
-    margin: 0 auto;
+    &:hover {
+        line-height: 38px;        
+        height: 36px;        
+    }    
     @media (min-width: $desktop-min) and (max-width: $desktop-max) {
-        width: 75%;
+
     }     
     @media (min-width: $tablet-min) and (max-width: $tablet-max) {
-        width: 90%;
+
     }     
     @media (max-width: $mobile-max) {
-        width: 100%; 
+
     }     
 }
 .form {
+    background-color: rgba(255, 233, 206, 0.7);
+    box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.3);
+    padding: 34px;
+    border-radius: 0 0 10px 0;
     width: 50%;
-    margin: 0 auto;
-    margin-bottom: 32px;
+
+    transition: 0.4s;
+    margin-top: -207px;
+
+    &.active {
+        margin-top: 0;
+    }   
     @media (min-width: $desktop-min) and (max-width: $desktop-max) {
         width: 75%;
     }     
@@ -140,6 +162,7 @@ input::placeholder { /* Most modern browsers support this now. */
     font-size: 22px;          
     width: 150px;
     height: 100%;
+    cursor: pointer;
     &:hover {
         background-color: #fff;
     }

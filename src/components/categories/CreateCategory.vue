@@ -1,15 +1,14 @@
 <template>
     <p 
-        v-if="!isFormOpen"
         href="#" 
         class="form-trigger"
-        @click="isFormOpen = true"
+        @click="toggleForm"
     >
-        Add new category
+        {{ !isFormOpen ? 'New category' : 'Close' }}
     </p>
     <form  
-        v-if="isFormOpen"
         class="form"
+        :class="{active: isFormOpen}"        
         @submit.prevent="saveCategory"
     >
         <ul class="input-list">
@@ -50,6 +49,9 @@ export default {
         }    
     },
     methods: {
+        toggleForm() {
+            this.isFormOpen = !this.isFormOpen
+        },        
         async saveCategory() {
             if (!this.categoryName) {
                 this.isFormOpen = false
@@ -68,34 +70,48 @@ export default {
 <style lang="scss" scoped>
 
 .form-trigger {
+    z-index: 4;
     position: absolute;
     left: 0;
     top: 0;
-    height: 38px;
-    line-height: 38px;
+    height: 34px;
+    line-height: 34px;
     border-radius: 0 0 10px 0;
     background-color: rgba(255, 233, 206, 0.7);
     box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.3);
-    
     color: rgb(18, 72, 189);
     font-size: 16px;
     padding: 0 12px;
     margin-bottom: 16px;
     cursor: pointer;
+    &:hover {
+        line-height: 38px;        
+        height: 36px;        
+    }
 }
 .form {
     display: flex;
-    padding: 32px;
+    padding: 34px 16px;
     background-color: rgba(255, 233, 206, 0.7);
-    box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.3);    
+    box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.3);   
+    
+    transition: 0.4s;
+    margin-top: -116px;
+
+    &.active {
+        margin-top: 0;
+    }      
+
     @media (min-width: $desktop-min) and (max-width: $desktop-max) {
-        padding: 16px;
+        //padding: 16px;
     }     
     @media (min-width: $tablet-min) and (max-width: $tablet-max) {
-        padding: 16px;
+        //padding: 16px;
+        margin-top: -154px;        
     }     
     @media (max-width: $mobile-max) {
-        padding: 32px;         
+        //padding: 32px;    
+        margin-top: -154px;              
     }     
 }
 .input-list {

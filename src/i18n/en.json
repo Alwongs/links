@@ -1,0 +1,10 @@
+{
+    "register": "Register",
+    "login": "Login",
+    "logout": "Logout",
+    "categories": "Categories",
+    "links": "Links",
+    "save": "Save",
+    "update": "Update",
+    "delete": "Delete"
+}

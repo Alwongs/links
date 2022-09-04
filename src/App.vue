@@ -15,6 +15,7 @@ import AppAside from '@/components/AppAside.vue'
 import AppFooter from '@/components/AppFooter.vue'
 
 export default {
+
     name: 'App',
     components: {
         AppPanel,
@@ -30,7 +31,8 @@ export default {
     position: relative;
     min-height: 200px;
     height: calc(100vh - 128px);
-    display: flex;   
+    display: flex;
+    max-width: 100vw;   
 }
 .aside-block {
     flex: 0 0 400px;
