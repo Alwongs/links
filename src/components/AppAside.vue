@@ -34,7 +34,7 @@ export default {
 .app-aside {
     z-index: 4;
     background-color: rgb(207, 234, 223);
-    height: 100%;
+    min-height: 100%;
     box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.2);
     //padding: 32px 0;
     @media (min-width: $desktop-min) and (max-width: $desktop-max) {

@@ -135,6 +135,7 @@ export default {
     }     
     @media (max-width: $mobile-max) {
         width: 100%; 
+        border-radius: 0;        
     }       
 }
 .input-item {

@@ -1,11 +1,5 @@
 <template>
-    <p 
-        href="#" 
-        class="form-trigger"
-        @click="toggleForm"
-    >
-        {{ !isFormOpen ? 'New category' : 'Close' }}
-    </p>
+    <form-trigger />
     <form  
         class="form"
         :class="{active: isFormOpen}"        
@@ -31,9 +25,11 @@
 </template>
 
 <script>
+import FormTrigger from '@/components/FormTrigger.vue'
 
 export default {
     name: 'CategoryList',
+    components: { FormTrigger },
     data() {
         return {
             isFormOpen: false,            
@@ -111,7 +107,7 @@ export default {
     }     
     @media (max-width: $mobile-max) {
         //padding: 32px;    
-        margin-top: -154px;              
+        margin-top: -166px;              
     }     
 }
 .input-list {

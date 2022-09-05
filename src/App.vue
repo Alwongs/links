@@ -29,8 +29,7 @@ export default {
 
 .wrapper {
     position: relative;
-    min-height: 200px;
-    height: calc(100vh - 128px);
+    min-height: calc(100vh - 128px);
     display: flex;
     max-width: 100vw;   
 }
