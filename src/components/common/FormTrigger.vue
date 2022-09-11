@@ -2,22 +2,24 @@
     <p 
         href="#" 
         class="form-trigger"
-        @click="toggleForm"
+        :styles="{'z-index': zIndex}"
+        @click="$emit('toggleForm')"
     >
-        {{ !isFormOpen ? 'New category' : 'Close' }}
+        {{ !isFormOpen ? title : 'Close' }}
     </p>  
 </template>
 
 <script>
 export default {
-    name: 'FormTrigger'
+    name: 'FormTrigger',
+    props: ['isFormOpen', 'title', 'zIndex']
 }
 </script>
 
 <style lang="scss" scoped>
 
 .form-trigger {
-    z-index: 4;
+    //z-index: 4;
     position: absolute;
     left: 0;
     top: 0;

@@ -7,8 +7,6 @@
             <create-category /> 
         </div>
 
-           
-       
         <category-list 
             v-if="!isAsideOpen" 
             class="home-page-categories" 

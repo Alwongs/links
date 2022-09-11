@@ -1,12 +1,10 @@
 <template>
-    <p 
-        v-if="!isAsideOpen"
-        href="#" 
-        class="form-trigger"
-        @click="toggleForm"
-    >
-        {{ !isFormOpen ? 'New link' : 'Close' }}
-    </p>
+    <form-trigger 
+        :isFormOpen="isFormOpen"
+        :title="'New link'"
+        :zIndex="1"
+        @toggleForm="toggleForm"
+    />
     <form    
         class="form"
         :class="{active: isFormOpen}"
@@ -42,8 +40,11 @@
 </template>
 
 <script>
+import FormTrigger from '@/components/common/FormTrigger.vue'
+
 export default {
     name: 'CreateLink',
+    components: { FormTrigger },
     data() {
         return {
             isFormOpen: false, 
@@ -69,11 +70,7 @@ export default {
         toggleForm() {
             this.isFormOpen = !this.isFormOpen
         },
-        async saveLink() {
-            if (this.link.title === '' || this.link.src === '') {
-                this.isFormOpen = false
-                return
-            }            
+        async saveLink() {         
             await this.$store.dispatch('saveLink', this.link)
             await this.$store.dispatch('getLinkList', this.categoryId); 
             this.link.title = ''
@@ -85,35 +82,6 @@ export default {
 
 <style lang="scss" scoped>
 
-.form-trigger {
-    z-index: 3;
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 34px;
-    line-height: 34px;
-    border-radius: 0 0 10px 0;
-    background-color: rgba(255, 233, 206, 0.7);
-    box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.3);
-    color: rgb(18, 72, 189);
-    font-size: 16px;
-    padding: 0 12px;
-    margin-bottom: 16px;
-    cursor: pointer;
-    &:hover {
-        line-height: 38px;        
-        height: 36px;        
-    }    
-    @media (min-width: $desktop-min) and (max-width: $desktop-max) {
-
-    }     
-    @media (min-width: $tablet-min) and (max-width: $tablet-max) {
-
-    }     
-    @media (max-width: $mobile-max) {
-
-    }     
-}
 .form {
     background-color: rgba(255, 233, 206, 0.7);
     box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.3);

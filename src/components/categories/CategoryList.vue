@@ -26,14 +26,16 @@
                 </button>
             </li>
         </ul>
-        <p v-if="loading" class="loading">Загрузка...</p>        
+        <pre-loader />      
     </div>
 </template>
 
 <script>
+import PreLoader from '@/components/common/PreLoader.vue'
 
 export default {
     name: 'CategoryList',
+    components: { PreLoader },
     data() {
         return {
             categoryName: ''
