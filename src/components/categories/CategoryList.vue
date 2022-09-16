@@ -3,7 +3,7 @@
         class="app-categories" 
     >
         <h2 class="title">
-            Caterories
+            {{ $t('categories') }}
         </h2>
 
         <ul class="category-list">
@@ -26,7 +26,7 @@
                 </button>
             </li>
         </ul>
-        <pre-loader />      
+        <pre-loader v-if="loading"/>      
     </div>
 </template>
 

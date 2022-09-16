@@ -1,7 +1,7 @@
 <template>
     <form-trigger 
         :isFormOpen="isFormOpen"
-        :title="'New link'"
+        :title="$t('newLink')"
         :zIndex="1"
         @toggleForm="toggleForm"
     />

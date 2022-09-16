@@ -1,7 +1,7 @@
 <template>
     <div class="app-page">
         <h1 class="title">
-            Manage your useful links..
+            {{ $t('manageYourLinks') }}..
         </h1>
         <div class="create-category-wrap">
             <create-category /> 
@@ -54,7 +54,7 @@ export default {
 .title {
     font-size: 28px;
     text-align: center;
-    margin-bottom: 32px;
+    margin: 32px 0;
     @media (max-width: $mobile-max) {
         display: none;             
     }        

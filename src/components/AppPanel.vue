@@ -18,7 +18,7 @@
                     <router-link 
                         :to="item.route"
                     >
-                        {{ item.title }}
+                        {{ $t(item.title) }}
                     </router-link>
                 </li>
                 <li 
@@ -26,7 +26,13 @@
                     class="nav-item"
                     @click="logout()"
                 >
-                    Выйти
+                    {{ $t('logout') }} 
+                </li>
+                <li 
+                    class="nav-item"
+                    @click="switchLang"
+                >
+                    {{ $t('switchLang') }} 
                 </li>
             </ul>  
             <div 
@@ -40,8 +46,9 @@
 
 <script>
 
+
 export default {
-   
+
     name: 'AppPanel',
     computed: {
         isUserAuthenticated() {
@@ -54,17 +61,17 @@ export default {
             return this.isUserAuthenticated
                 ? [
                 {
-                    title: 'Profile',
+                    title: 'profile',
                     route: '/profile-page',
                 },
             ] :
             [                       
                 {
-                    title: 'Вход',
+                    title: 'login',
                     route: '/login',
                 },
                 {
-                    title: 'Регистрация',
+                    title: 'register',
                     route: '/register',
                 },
 
@@ -77,6 +84,17 @@ export default {
         }
     },
     methods: {
+        switchLang() {
+            if (this.$i18n.locale === 'en') {
+                this.$i18n.locale = 'ru'
+                return                
+            }
+            if (this.$i18n.locale === 'ru') {
+                this.$i18n.locale = 'en' 
+                return                                 
+            }
+        },
+
         toggleMenu() {
             this.$store.commit('TOGGLE_ASIDE')
         },

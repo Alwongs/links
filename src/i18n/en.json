@@ -3,8 +3,13 @@
     "login": "Login",
     "logout": "Logout",
     "categories": "Categories",
+    "newCategory": "New Category",
     "links": "Links",
+    "newLink": "New Link",
     "save": "Save",
     "update": "Update",
-    "delete": "Delete"
+    "delete": "Delete",
+    "profile": "Profile",
+    "switchLang": "Switch lang",
+    "manageYourLinks": "Manage your useful links"
 }

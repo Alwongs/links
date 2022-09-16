@@ -3,8 +3,13 @@
     "login": "Вход",
     "logout": "Выйти",
     "categories": "Категории",
+    "newCategory": "Добавить категорию",
     "links": "Ссылки",
+    "newLink": "Добавить ссылку",
     "save": "Сохранить",
     "update": "Обновить",
-    "delete": "Удалить"
+    "delete": "Удалить",
+    "profile": "Профиль",
+    "switchLang": "Изменить язык",
+    "manageYourLinks": "Управляйте своими ссылками"
 }
