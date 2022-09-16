@@ -1,54 +1,23 @@
 <template>
     <div class="app-panel">
         <div 
-            class="panel-item home-link" 
+            class="home-link" 
             @click="$router.push({name: 'home'})"
         >
-            {{ $t('links') }}                        
+            Links
         </div>
 
-        <nav class="panel-item" :class="{active: isAsideOpen}">
-            <ul class="nav-list">
-                <li 
-                    v-for="item in menuItems"
-                    :key="item.route"
-                    class="nav-item"
-                    @click="goTo(item.route)"                    
-                >
-                    <router-link 
-                        :to="item.route"
-                    >
-                        {{ $t(item.title) }}
-                    </router-link>
-                </li>
-                <li 
-                    v-if="isUserAuthenticated"
-                    class="nav-item"
-                    @click="logout()"
-                >
-                    {{ $t('logout') }} 
-                </li>
-                <li 
-                    class="nav-item"
-                    @click="switchLang"
-                >
-                    {{ $t('switchLang') }} 
-                </li>
-            </ul>  
-            <div 
-                class="menu-btn" 
-                :class="{opened: isAsideOpen}"
-                @click="toggleMenu"
-            ></div>               
-        </nav>
+        <div 
+            class="menu-btn" 
+            :class="{opened: isAsideOpen}"
+            @click="toggleMenu"
+        ></div>               
     </div>
 </template>
 
 <script>
 
-
 export default {
-
     name: 'AppPanel',
     computed: {
         isUserAuthenticated() {
@@ -57,26 +26,6 @@ export default {
         isAsideOpen() {
             return this.$store.getters.isAsideOpen
         },               
-        menuItems() {
-            return this.isUserAuthenticated
-                ? [
-                {
-                    title: 'profile',
-                    route: '/profile-page',
-                },
-            ] :
-            [                       
-                {
-                    title: 'login',
-                    route: '/login',
-                },
-                {
-                    title: 'register',
-                    route: '/register',
-                },
-
-            ]            
-        }
     },    
     data() {
         return {
@@ -84,33 +33,9 @@ export default {
         }
     },
     methods: {
-        switchLang() {
-            if (this.$i18n.locale === 'en') {
-                this.$i18n.locale = 'ru'
-                return                
-            }
-            if (this.$i18n.locale === 'ru') {
-                this.$i18n.locale = 'en' 
-                return                                 
-            }
-        },
-
         toggleMenu() {
             this.$store.commit('TOGGLE_ASIDE')
-        },
-        logout() {
-            if (confirm('Вы уверены?')) {
-                this.$store.dispatch('logOut');
-                this.$router.push('/'); 
-                this.isMenuOpen = false;                     
-                return                                      
-            } else {
-                return
-            }
-        },
-        goTo(path) {
-            this.$router.push(path);
-        },      
+        },    
     }
 }
 </script>
@@ -139,64 +64,30 @@ export default {
         font-size: 22px;
     }      
 }
-
-.panel-item {
-    display: flex;
-}
 .home-link {
+    border: 1px solid rgb(255, 225, 92);
+    border-radius: 18px;
+    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.4);
+    padding: 0 10px;
+    letter-spacing: 2px;    
+    font-size: 28px;
+    font-style: italic;
+    font-weight: 500;
     cursor: pointer;
-}
-
-.nav-wrap {
-
-    @media (max-width: $mobile-max) {
-        z-index: 1;
-        background-color: rgb(38, 115, 204);
-        width: 100%;
-        //height: 100%;
-        position: absolute;
-        left: 0;
-        padding: 32px;
-        transition: 0.4s;
-        transform: translateY(-100%);  
-        &.active {
-            transform: translateY(0%);
-        }              
-    }     
-}
-.nav-list {
-    display: flex;
-    @media (max-width: $mobile-max) {
-        font-size: 22px;
-        //flex-direction: column;
-    }         
-}
-.nav-item {
-    margin-right: 16px;
-    cursor: pointer;
-    @media (max-width: $mobile-max) {
-        width: 100%;
-        border-bottom: 1px solid grey;
-
-    }      
 }
 .menu-btn {
-    display: none;
-    @media (max-width: $mobile-max) {
-        display: block;
-        z-index: 2;        
-        cursor: pointer;
-        //position: absolute;
-        content: '';
-        width: 32px;
-        height: 32px;
-        right: 16px;
-        top: 16px;
-        background-image: url('../assets/img/svg/menu_btn.svg');
-        &.opened {
-            background-image: url('../assets/img/svg/menu_close_btn.svg');        
-        } 
-    }     
+    display: block;
+    z-index: 7;        
+    cursor: pointer;
+    content: '';
+    width: 32px;
+    height: 32px;
+    right: 16px;
+    top: 16px;
+    background-image: url('../assets/img/svg/menu_btn.svg');
+    &.opened {
+        background-image: url('../assets/img/svg/menu_close_btn.svg');        
+    } 
 }
 a {
     color: rgb(255, 231, 124);

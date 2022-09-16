@@ -1,4 +1,6 @@
 <template>
+    <app-menu />
+
     <app-panel />
 
     <div class="wrapper">
@@ -13,6 +15,7 @@
 import AppPanel from '@/components/AppPanel.vue'
 import AppAside from '@/components/AppAside.vue'
 import AppFooter from '@/components/AppFooter.vue'
+import AppMenu from '@/components/AppMenu.vue'
 
 export default {
 
@@ -21,6 +24,7 @@ export default {
         AppPanel,
         AppAside,
         AppFooter,
+        AppMenu,
     },
 }
 </script>
@@ -31,7 +35,10 @@ export default {
     position: relative;
     min-height: calc(100vh - 128px);
     display: flex;
-    max-width: 100vw;   
+    max-width: 100vw;  
+    @media (max-width: $mobile-max) {
+        flex-direction: column; 
+    }      
 }
 .aside-block {
     flex: 0 0 400px;
@@ -42,6 +49,7 @@ export default {
         flex: 0 0 250px;
     }     
     @media (max-width: $mobile-max) {
+        flex: 0 0 100%;
         width: 100%; 
     } 
 }
