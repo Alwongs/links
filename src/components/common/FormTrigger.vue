@@ -5,7 +5,7 @@
         :styles="{'z-index': zIndex}"
         @click="$emit('toggleForm')"
     >
-        {{ !isFormOpen ? title : 'Close' }}
+        {{ !isFormOpen ? title : $t('close') }}
     </p>  
 </template>
 

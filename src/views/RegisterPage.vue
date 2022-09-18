@@ -1,6 +1,6 @@
 <template>
     <div class="app-page">
-        <h1 class="title">Register</h1>
+        <h1 class="title">{{ $t('register') }}</h1>
         <div 
             v-if="error" 
             class="error"
@@ -17,7 +17,7 @@
                     <input 
                         v-model="email"
                         type="text" 
-                        placeholder="email"
+                        :placeholder="$t('email')"
                         required
                     >
                 </li>
@@ -25,7 +25,7 @@
                     <input 
                         v-model="password"
                         type="text" 
-                        placeholder="password"
+                        :placeholder="$t('password')"
                         required
                     >
                 </li>
@@ -33,11 +33,11 @@
 
             <div class="btn-block">            
                 <button
-                    v-if="!processing" 
+                    v-if="!loading" 
                     type="submit" 
                     class="btn btn-submit" 
                 >
-                    Сохранить
+                    {{ $t('save') }}
                 </button>
             </div>
         </form>
@@ -45,6 +45,7 @@
 </template>
 
 <script>
+
 export default {
     data() {
         return {
@@ -56,8 +57,8 @@ export default {
         error() {
             return this.$store.getters.getError
         },
-        processing() {
-            return this.$store.getters.getProcessing
+        loading() {
+            return this.$store.getters.getLoading            
         },
         isUserAuthenticated() {
             return this.$store.getters.isUserAuthenticated;
@@ -87,21 +88,24 @@ export default {
 
 <style lang="scss" scoped>
 
+.title {
+    font-size: 28px;
+    text-align: center;
+    margin: 32px 0;
+}
 .form {
-
+    margin: 0 auto;
+    width: 500px;
     @media (min-width: $desktop-min) and (max-width: $desktop-max) {
-        //width: 400px; 
+        width: 400px; 
     }     
     @media (min-width: $tablet-min) and (max-width: $tablet-max) {
-       //width: 70%; 
+        width: 70%; 
     }     
     @media (max-width: $mobile-max) {
         width: 100%; 
+        padding: 16px;
     } 
-}
-.title {
-    font-size: 24px;
-    margin-bottom: 32px;
 }
 .input-list {
     margin-bottom: 16px;

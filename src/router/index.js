@@ -13,11 +13,6 @@ const routes = [
         component: () => import('@/views/LinksPage.vue')
     },
     {
-        path: '/profile-page',
-        name: 'profile-page',
-        component: () => import('@/views/ProfilePage.vue')
-    },
-    {
         path: '/login',
         name: 'login',
         component: () => import('@/views/LoginPage.vue'),

@@ -1,7 +1,7 @@
 <template>
     <form-trigger 
         :isFormOpen="isFormOpen"
-        :title="$t('newCategory')"
+        :title="$t('new_сategory')"
         @toggleForm="toggleForm"
     />
     <form  

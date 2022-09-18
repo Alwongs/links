@@ -1,16 +1,21 @@
 <template>
     <div class="app-page">
-        <p v-if="loading" class="loading">Загрузка...</p> 
         <create-link />  
-
+        
         <main class="main">
             <h1 class="title">
-                {{ getCategory.name }}
+                {{ getCategory.name || 'not found category name' }}
             </h1>
 
             <ul class="link-list">
+                <li 
+                    v-if="!getCategory.links"
+                    class="no-items"
+                >
+                    Link list is empty..
+                </li>
                 <link-item 
-                    v-for="(link, index) in getLinkList"
+                    v-for="(link, index) in getCategory.links"
                     :key="link.id"
                     :link="link"
                     :number="index"
@@ -35,26 +40,16 @@ export default {
             categoryId: this.$route.params.id,
         }
     },
-    computed: {
-        loading() {
-            return this.$store.getters.getLoading            
-        }, 
+    computed: { 
         getCategory() {
             return this.$store.getters.getCategory
-        },
-        getLinkList() {
-            return this.$store.getters.getLinkList
-        },
-       
+        },       
     },
     async mounted() {
         if (!this.$store.getters.getCategoryList.length) {
             await this.$store.dispatch('getCategoryList') 
-        }       
+        } 
         await this.$store.dispatch('getCategory', this.categoryId) 
-        if (!this.getLinkList.length) {
-            await this.$store.dispatch('getLinkList', this.categoryId)            
-        }
     }
 }
 </script>
@@ -77,5 +72,12 @@ export default {
     font-size: 28px;    
     text-align: center;
     margin-bottom: 32px;
+}
+.no-items {
+    text-align: center;
+    padding: 32px 0 8px 0;    
+    font-style: italic;
+    color: grey;
+    font-weight: 400;
 }
 </style>

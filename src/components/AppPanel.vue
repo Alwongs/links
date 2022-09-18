@@ -2,14 +2,20 @@
     <div class="app-panel">
         <div 
             class="home-link" 
-            @click="$router.push({name: 'home'})"
+            @click="goHome"
         >
             Links
         </div>
 
         <div 
+            v-if="loading" 
+            class="pre-loader"
+        >
+            Loading...
+        </div>
+
+        <div 
             class="menu-btn" 
-            :class="{opened: isAsideOpen}"
             @click="toggleMenu"
         ></div>               
     </div>
@@ -20,19 +26,15 @@
 export default {
     name: 'AppPanel',
     computed: {
-        isUserAuthenticated() {
-            return this.$store.getters.isUserAuthenticated;
-        },  
-        isAsideOpen() {
-            return this.$store.getters.isAsideOpen
+        loading() {
+            return this.$store.getters.getLoading            
         },               
-    },    
-    data() {
-        return {
-
-        }
-    },
+    }, 
     methods: {
+        goHome() {
+            this.$router.push({name: 'home'})
+            this.$store.commit('CLOSE_ASIDE')            
+        },
         toggleMenu() {
             this.$store.commit('TOGGLE_ASIDE')
         },    
@@ -65,9 +67,9 @@ export default {
     }      
 }
 .home-link {
-    border: 1px solid rgb(255, 225, 92);
+    border: 1px solid rgb(255, 225, 92, 0.4);
     border-radius: 18px;
-    box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.4);
+    box-shadow: 1px 1px 3px 1px rgba(255, 225, 92, 0.3);
     padding: 0 10px;
     letter-spacing: 2px;    
     font-size: 28px;

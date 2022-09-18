@@ -2,12 +2,13 @@
     <app-menu />
 
     <app-panel />
-
     <div class="wrapper">
-        <app-aside class="aside-block" />
+        <app-aside 
+            v-if="isUserAuthenticated" 
+            class="aside-block" 
+        />
         <router-view />
     </div>
-    
     <app-footer />
 </template>
 
@@ -18,7 +19,6 @@ import AppFooter from '@/components/AppFooter.vue'
 import AppMenu from '@/components/AppMenu.vue'
 
 export default {
-
     name: 'App',
     components: {
         AppPanel,
@@ -26,6 +26,11 @@ export default {
         AppFooter,
         AppMenu,
     },
+    computed: {
+        isUserAuthenticated() {
+            return this.$store.getters.isUserAuthenticated;
+        }, 
+    },     
 }
 </script>
 
@@ -46,7 +51,7 @@ export default {
         flex: 0 0 350px;
     }     
     @media (min-width: $tablet-min) and (max-width: $tablet-max) {
-        flex: 0 0 250px;
+        flex: 0 0 300px;
     }     
     @media (max-width: $mobile-max) {
         flex: 0 0 100%;

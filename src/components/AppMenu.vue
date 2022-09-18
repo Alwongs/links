@@ -9,37 +9,25 @@
                     class="nav-item"
                     @click="switchLang"
                 >
-                    {{ $t('switchLang') }} 
-                </li>
-
-                <li 
-                    v-if="isUserAuthenticated"                
-                    class="nav-item"
-                    @click="goTo('/profile-page')"                    
-                >
-                    <router-link 
-                        :to="'/profile-page'"
-                    >
-                        {{ $t('profile') }}
-                    </router-link>
+                    {{ $t('language') + ': ' + $t(lang)  }} 
                 </li>
 
                 <li 
                     v-if="!isUserAuthenticated"                 
                     class="nav-item"
-                    @click="goTo('register')"                    
+                    @click="goTo('/register')"                    
                 >
                     <router-link 
-                        :to="'register'"
+                        :to="'/register'"
                     >
-                        {{ $t('/register') }}
+                        {{ $t('register') }}
                     </router-link>
                 </li>
 
                 <li 
                     v-if="!isUserAuthenticated"                
                     class="nav-item"
-                    @click="goTo('login')"                    
+                    @click="goTo('/login')"                    
                 >
                     <router-link 
                         :to="'/login'"
@@ -64,6 +52,11 @@
 
 export default {
     name: 'AppAside',
+    data() {
+        return {
+            lang: 'ru'
+        }
+    },
     computed: {
         isUserAuthenticated() {
             return this.$store.getters.isUserAuthenticated;
@@ -80,10 +73,12 @@ export default {
         switchLang() {
             if (this.$i18n.locale === 'en') {
                 this.$i18n.locale = 'ru'
+                this.lang = 'ru'
                 return                
             }
             if (this.$i18n.locale === 'ru') {
                 this.$i18n.locale = 'en' 
+                this.lang = 'en'                
                 return                                 
             }
         },
@@ -91,7 +86,8 @@ export default {
             if (confirm('Вы уверены?')) {
                 this.$store.dispatch('logOut');
                 this.$router.push('/'); 
-                this.isMenuOpen = false;                     
+                this.isMenuOpen = false; 
+                this.$store.commit('CLOSE_ASIDE')                    
                 return                                      
             } else {
                 return

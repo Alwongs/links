@@ -31,6 +31,7 @@ export default {
             await dispatch('getCategoryList');
             commit('SET_LOADING', false);
         },
+
         async getCategory({getters, commit}, id) { 
             commit('SET_LOADING', true);
             const dbRef = ref(getDatabase());
@@ -40,9 +41,6 @@ export default {
                 if (data.exists()) {
                     const category = data.val()                      
                     commit('UPDATE_CATEGORY', category);
-                    if(category.links) {
-                        commit('UPDATE_LINK_LIST', category.links)
-                    }
                     commit('SET_LOADING', false);
                 } else {
                     commit('UPDATE_CATEGORY', {})
@@ -51,7 +49,8 @@ export default {
             }).catch((error) => {
                 console.error(error);
             });
-        },        
+        },
+
         async getCategoryList({getters, commit}) { 
             commit('SET_LOADING', true);
             const dbRef = ref(getDatabase());
@@ -76,7 +75,6 @@ export default {
             commit('SET_LOADING', true);            
             const db = getDatabase();
             const uid = getters.userId;
-            //const categoryId = Date.now()
             category.id = Date.now()
 
             await set(ref(db, `${uid}/categories/${category.id}`), category);

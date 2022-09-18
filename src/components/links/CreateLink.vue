@@ -1,7 +1,7 @@
 <template>
     <form-trigger 
         :isFormOpen="isFormOpen"
-        :title="$t('newLink')"
+        :title="$t('new_link')"
         :zIndex="1"
         @toggleForm="toggleForm"
     />
@@ -16,7 +16,7 @@
                 <input 
                     v-model="link.title" 
                     type="text" 
-                    placeholder="link title.."
+                    :placeholder="$t('link_title')"
                     required
                 >
             </li>
@@ -24,7 +24,7 @@
                 <input 
                     v-model="link.src" 
                     type="text" 
-                    placeholder="link src.."
+                    :placeholder="$t('link_src')"
                     required                    
                 >
             </li>
@@ -58,13 +58,7 @@ export default {
     computed: {
         loading() {
             return this.$store.getters.getLoading            
-        }, 
-        getLinkList() {
-            return this.$store.getters.getLinkList
-        },
-        isAsideOpen() {
-            return this.$store.getters.isAsideOpen
-        }       
+        },      
     },
     methods: {
         toggleForm() {
@@ -72,9 +66,9 @@ export default {
         },
         async saveLink() {         
             await this.$store.dispatch('saveLink', this.link)
-            await this.$store.dispatch('getLinkList', this.categoryId); 
             this.link.title = ''
             this.link.src = ''
+            this.isFormOpen = false
         },
     },        
 }
