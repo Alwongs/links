@@ -15,6 +15,7 @@
         </div>
 
         <div 
+            :class="{ opened: isAsideOpen }"
             class="menu-btn" 
             @click="toggleMenu"
         ></div>               
@@ -28,6 +29,9 @@ export default {
     computed: {
         loading() {
             return this.$store.getters.getLoading            
+        },               
+        isAsideOpen() {
+            return this.$store.getters.isAsideOpen            
         },               
     }, 
     methods: {

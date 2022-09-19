@@ -48,6 +48,9 @@ export default {
     methods: {
         async deleteCategory(id) {
             await this.$store.dispatch('deleteCategory', id)
+            if (this.$route.params.id === id) {
+                this.$router.push('/')
+            }
         },
         showCategory(category) {
             this.$emit('closeList')            
