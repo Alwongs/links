@@ -88,11 +88,17 @@ export default {
     @media (min-width: $tablet-min) and (max-width: $tablet-max) {
         padding: 12px;
     }     
-    @media (max-width: $mobile-max) {
+    @media (max-width: $mobile-max) {        
         padding: 12px;         
     }   
     .category-name {
-        flex: 1 1 auto;
+        flex: 0 0 85%;
+
+        word-break: break-all;
+        white-space: nowrap;
+        overflow: hidden; 
+        text-overflow: ellipsis;
+
         cursor: pointer;        
         &:hover  {
             color: red;

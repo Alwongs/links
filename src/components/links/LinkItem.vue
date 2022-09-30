@@ -5,10 +5,10 @@
                 target="_blank" 
                 :href="link.src"
             >
-                {{ link.title }}
+                {{ limitText(link.title) }}
             </a> 
         </div>
-        <div class="flex-divider"></div>
+        <div class="flex-divider" @click="getWidth"></div>
 
         <button 
             id="button"
@@ -23,18 +23,42 @@
 export default {
     name: 'LinkItem',
     props: ['link', 'number'],
+    data() {
+        return {
+            width: window.innerWidth
+        }
+    },    
     computed: {
         loading() {
             return this.$store.getters.getLoading            
         }, 
     },
     methods: {
+        updateWidth() {
+            this.width = window.innerWidth;
+        },
+        limitText(value) {
+            let screenWidth = this.width
+
+            if (screenWidth >= 1439) {
+                return value.substring(0, screenWidth / 20) + '...'
+            } else if (screenWidth >= 1023) {
+                return value.substring(0, screenWidth / 23) + '...'            
+            } else if (screenWidth >= 768) {
+                return value.substring(0, screenWidth / 25) + '...'
+            } else if (screenWidth < 768) {
+                return value.substring(0, screenWidth / 19) + '...'
+            }
+        },
         async deleteLink(link) {
             if (confirm(`Delete "${link.title}"`)) {
                 await this.$store.dispatch('deleteLink', link.id)
             }
         }
-    }   
+    }, 
+    created() {
+        window.addEventListener('resize', this.updateWidth);
+    },      
 }
 </script>
 
@@ -46,17 +70,10 @@ export default {
     justify-content: space-between;
     margin-bottom: 20px;
     max-width: 100%;
-
     .link-name {
         font-size: 22px;
-        flex: 0 1 auto;        
+        flex: 0 0 auto;        
         margin-right: 24px;
-        //-- ниже возможно имеются лишние свойства...
-        word-break: break-all;
-        white-space: nowrap;
-        overflow: hidden; 
-        text-overflow: ellipsis;
-        //-----------------------------------
         padding: 0 5px;       
         cursor: pointer;        
         &:hover  {
@@ -71,8 +88,14 @@ export default {
             background-repeat: no-repeat;
             height: 24px;
             width: 24px;
-            margin-right: 4px;                  
-        }              
+            margin-right: 4px; 
+            @media (max-width: $mobile-max) {
+                margin-right: 2px;
+            }                              
+        } 
+        @media (max-width: $mobile-max) {
+            margin-right: 4px;
+        }                      
     }   
     .flex-divider {
         flex: 1 1 auto;       
