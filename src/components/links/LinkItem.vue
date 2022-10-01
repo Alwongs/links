@@ -4,6 +4,7 @@
             <a 
                 target="_blank" 
                 :href="link.src"
+                class="link"
             >
                 {{ limitText(link.title) }}
             </a> 
@@ -33,21 +34,32 @@ export default {
             return this.$store.getters.getLoading            
         }, 
     },
+    watch: {
+        width() {
+
+        }
+    },
     methods: {
         updateWidth() {
             this.width = window.innerWidth;
         },
-        limitText(value) {
-            let screenWidth = this.width
-
-            if (screenWidth >= 1439) {
-                return value.substring(0, screenWidth / 20) + '...'
-            } else if (screenWidth >= 1023) {
-                return value.substring(0, screenWidth / 23) + '...'            
-            } else if (screenWidth >= 768) {
-                return value.substring(0, screenWidth / 25) + '...'
-            } else if (screenWidth < 768) {
-                return value.substring(0, screenWidth / 19) + '...'
+        capitalizeFirstLetter(str) {
+            return str[0].toUpperCase() + str.substring(1)
+        },
+        limitText(str) {
+            let value = this.capitalizeFirstLetter(str)
+            if (this.width >= 2550) {
+                return value.substring(0, this.width / 20) + '...'
+            } else if (this.width < 2550 && this.width >= 1980) {
+                return value.substring(0, this.width / 22) + '...'
+            } else if (this.width < 1980 && this.width >= 1440) {
+                return value.substring(0, this.width / 30) + '...'
+            } else if (this.width < 1440 && this.width >= 1024) {
+                return value.substring(0, this.width / 30) + '...'            
+            } else if (this.width < 1023 && this.width >= 768) {
+                return value.substring(0, this.width / 30) + '...'
+            } else if (this.width < 768) {
+                return value.substring(0, this.width / 19) + '...'
             }
         },
         async deleteLink(link) {
@@ -72,7 +84,7 @@ export default {
     max-width: 100%;
     .link-name {
         font-size: 22px;
-        flex: 0 0 auto;        
+        //flex: 0 0 auto;        
         margin-right: 24px;
         padding: 0 5px;       
         cursor: pointer;        
