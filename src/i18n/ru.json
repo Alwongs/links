@@ -18,5 +18,7 @@
     "password": "пароль",
     "link_title": "название",
     "link_src": "ссылка",
-    "close": "Закрыть"
+    "close": "Закрыть",
+    "do_not_have_account": "Еще не зарегистрированы?",
+    "already_have_account": "Уже есть регистрация?"
 }

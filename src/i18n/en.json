@@ -18,5 +18,7 @@
     "password": "password",
     "link_title": "link title",
     "link_src": "link src",
-    "close": "Close"
+    "close": "Close",
+    "do_not_have_account": "Don't have account?",
+    "already_have_account": "Already have account?"
 }

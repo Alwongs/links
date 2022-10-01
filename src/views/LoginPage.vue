@@ -15,23 +15,43 @@
             <ul class="input-list">
                 <li class="form-item">
                     <input 
-                        v-model="email"
+                        v-model.trim="email"
                         type="text" 
                         :placeholder="$t('email')"
-                        required
+                        :class="{invalid: (v$.email.$dirty && v$.email.$error)}"
                     >
+                    <small 
+                        v-for="error of v$.email.$errors"
+                        :key="error.$uid"
+                        class="error"
+                    >
+                        {{ error.$message }}
+                    </small> 
                 </li>
                 <li class="form-item">
                     <input 
-                        v-model="password"
+                        v-model.trim="password"
                         type="text" 
                         :placeholder="$t('password')"
-                        required
+                        :class="{invalid: (v$.password.$dirty && v$.password.$error)}"                       
                     >
+                    <small 
+                        v-for="error of v$.password.$errors"
+                        :key="error.$uid"
+                        class="error"
+                    >
+                        {{ error.$message }}. Now: {{ password.length }}
+                    </small>                    
                 </li>
             </ul>
 
             <div class="btn-block">
+                <a 
+                    href="/register"
+                    class="link"
+                >
+                    {{ $t('do_not_have_account') }}
+                </a>                 
                 <button
                     v-if="!loading" 
                     type="submit"
@@ -45,11 +65,23 @@
 </template>
 
 <script>
+import { useVuelidate } from '@vuelidate/core'
+import { email, required, minLength  } from '@vuelidate/validators'
+
 export default {
+    setup() {
+        return { v$: useVuelidate() }
+    },    
     data() {
         return {
             email: '',
             password: ''
+        }
+    },
+    validations() {
+        return {
+            email: {email, required},
+            password: {required, minLength: minLength(8)}
         }
     },
     computed: {
@@ -72,14 +104,18 @@ export default {
     },
     methods: {
         login() {
-            if (this.email && this.password) {
-                this.$store.dispatch('login',  {
-                    email: this.email, 
-                    password: this.password
-                });
-            } else {
-                alert('fill all fields please...')
+            if (this.v$.email.$invalid) {
+                this.v$.email.$touch()
+                return
             }
+            if (this.v$.password.$invalid) {
+                this.v$.password.$touch()
+                return
+            }            
+            this.$store.dispatch('login',  {
+                email: this.email, 
+                password: this.password
+            })           
         }
     }
 }
@@ -87,6 +123,11 @@ export default {
 
 <style lang="scss" scoped>
 
+.title {
+    font-size: 28px;
+    text-align: center;
+    margin: 32px 0;      
+}
 .form {
     margin: 0 auto;
     width: 500px;
@@ -101,19 +142,16 @@ export default {
         padding: 16px;
     } 
 }
-.title {
-    font-size: 28px;
-    text-align: center;
-    margin: 32px 0;      
-}
 .input-list {
     margin-bottom: 16px;
+}
+.form-item {
+    margin-bottom: 16px;    
 }
 .form-item > input {
     font-size: 18px;     
     width: 100%;
     height: 40px;
-    margin-bottom: 16px;
     padding-left: 8px;
     outline: none;
     border: none;
@@ -124,8 +162,20 @@ export default {
         min-height: 50px;
     }     
 }
+.error {
+    font-size: 13px;
+    color: red;
+}
+.invalid {
+    border-bottom: 1px solid red !important;
+}
 .btn-block {
-    text-align: end;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .link {
+        font-size: 14px;
+    }
 }
 .btn-submit {
     background-color: rgb(20, 161, 102);
