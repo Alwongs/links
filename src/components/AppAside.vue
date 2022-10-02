@@ -64,6 +64,7 @@ export default {
 
     }     
     @media (max-width: $mobile-max) {
+        font-size: 26px;
         cursor: pointer;        
     }      
 }

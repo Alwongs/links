@@ -20,5 +20,9 @@
     "link_src": "ссылка",
     "close": "Закрыть",
     "do_not_have_account": "Еще не зарегистрированы?",
-    "already_have_account": "Уже есть регистрация?"
+    "already_have_account": "Уже есть регистрация?",
+    "push_menu_on_panel_to_login": "Откройте меню на панели чтобы войти",
+    "wrong_url": "Ссылка должна начинаться с 'from http://' или 'https://'",
+    "min_number_of_letters": "Минимальное количество символов: ",
+    "field_should_be_filled": "Поле не должно быть пустым"
 }

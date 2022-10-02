@@ -46,12 +46,12 @@
             </ul>
 
             <div class="btn-block">
-                <a 
-                    href="/register"
+                <router-link 
+                    :to="{name: 'register'}"
                     class="link"
                 >
                     {{ $t('do_not_have_account') }}
-                </a>                 
+                </router-link>                 
                 <button
                     v-if="!loading" 
                     type="submit"

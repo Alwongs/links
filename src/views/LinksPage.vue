@@ -3,7 +3,10 @@
         <create-link />  
         
         <main class="main">
-            <h1 class="title">
+            <h1 
+                v-if="!loading" 
+                class="title"
+            >
                 {{ getCategory.name || 'not found category name' }}
             </h1>
 
@@ -41,6 +44,9 @@ export default {
         }
     },
     computed: { 
+        loading() {
+            return this.$store.getters.getLoading            
+        },        
         getCategory() {
             return this.$store.getters.getCategory
         },       
@@ -72,6 +78,9 @@ export default {
     font-size: 28px;    
     text-align: center;
     margin-bottom: 32px;
+    @media (max-width: $mobile-max) {
+        font-size: 26px; 
+    }  
 }
 .no-items {
     text-align: center;

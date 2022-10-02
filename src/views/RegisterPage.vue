@@ -46,12 +46,12 @@
             </ul>
 
             <div class="btn-block">  
-                <a 
-                    href="/login"
+                <router-link 
+                    :to="{name: 'login'}"
                     class="link"
                 >
                     {{ $t('already_have_account') }}
-                </a>          
+                </router-link>          
                 <button
                     v-if="!loading" 
                     type="submit" 

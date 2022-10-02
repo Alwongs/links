@@ -20,5 +20,9 @@
     "link_src": "link src",
     "close": "Close",
     "do_not_have_account": "Don't have account?",
-    "already_have_account": "Already have account?"
+    "already_have_account": "Already have account?",
+    "push_menu_on_panel_to_login": "Push menu on panel to login",
+    "wrong_url": "Link should start 'from http://' or 'https://'",
+    "min_number_of_letters": "Minimal number of letters: ",
+    "field_should_be_filled": "The field should be filled"
 }

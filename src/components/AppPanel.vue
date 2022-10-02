@@ -6,14 +6,15 @@
         >
             Links
         </div>
-
+<!--
         <div 
             v-if="loading" 
             class="pre-loader"
         >
             Loading...
         </div>
-
+-->        
+        <app-loader v-if="loading" />
         <div 
             :class="{ opened: isAsideOpen }"
             class="menu-btn" 
@@ -23,9 +24,11 @@
 </template>
 
 <script>
+import AppLoader from '@/components/AppLoader.vue'
 
 export default {
     name: 'AppPanel',
+    components: {AppLoader},
     computed: {
         loading() {
             return this.$store.getters.getLoading            
@@ -69,6 +72,9 @@ export default {
         padding: 0 16px;
         font-size: 22px;
     }      
+}
+.pre-loader {
+    font-weight: 500;
 }
 .home-link {
     border: 1px solid rgb(255, 225, 92, 0.4);

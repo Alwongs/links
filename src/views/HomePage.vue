@@ -6,7 +6,7 @@
         <p 
             v-if="!isUserAuthenticated" 
             class="text-center"
-        >Вы не авторизованы. Откройте меню на панели и нажмите "Войти"</p>   
+        >{{ $t('push_menu_on_panel_to_login') }}..</p>   
     </div>
 </template>
 

@@ -17,17 +17,47 @@
                     v-model="link.title" 
                     type="text" 
                     :placeholder="$t('link_title')"
-                    required
+                    :class="{ invalid: (v$.link.title.$dirty && v$.link.title.$error) }"                     
                 >
             </li>
+            <li 
+                v-for="error of v$.link.title.$errors"
+                :key="error.$uid"            
+                class="error-item"
+            >
+                <small 
+                    v-if="error.$params.type == 'minLength'" 
+                    class="error"
+                >
+                    {{ $t('min_number_of_letters') }} {{ error.$params.min }}
+                </small> 
+                <small 
+                    v-else-if="error.$params.type == 'required'" 
+                    class="error"
+                >
+                    {{ $t('field_should_be_filled') }}
+                </small> 
+            </li>
+
+
             <li class="input-item">
                 <input 
                     v-model="link.src" 
                     type="text" 
-                    :placeholder="$t('link_src')"
-                    required                    
-                >
+                    :placeholder="$t('link_src')"  
+                    :class="{ invalid: (v$.link.src.$dirty && v$.link.src.$error) }"            
+                >                  
             </li>
+            <li 
+                v-for="error of v$.link.src.$errors"
+                :key="error.$uid"            
+                class="error-item"
+            >
+                <small class="error">
+                    {{ error.$message }}
+                </small> 
+            </li>
+
             <li class="input-item submit-item">
                 <input 
                     type="submit" 
@@ -41,10 +71,15 @@
 
 <script>
 import FormTrigger from '@/components/common/FormTrigger.vue'
+import { useVuelidate } from '@vuelidate/core'
+import { required, url, minLength } from '@vuelidate/validators'
 
 export default {
     name: 'CreateLink',
     components: { FormTrigger },
+    setup() {
+        return { v$: useVuelidate() }
+    },     
     data() {
         return {
             isFormOpen: false, 
@@ -55,6 +90,14 @@ export default {
             }
         }
     },
+    validations() {
+        return {
+            link: {
+                title: { required, minLength: minLength(3) },
+                src: { url }
+            },
+        }
+    },    
     computed: {
         loading() {
             return this.$store.getters.getLoading            
@@ -62,12 +105,23 @@ export default {
     },
     methods: {
         toggleForm() {
+            this.link = {}
+            this.v$.link.$reset()
             this.isFormOpen = !this.isFormOpen
         },
-        async saveLink() {         
+        async saveLink() {
+            if (this.v$.link.title.$invalid) {
+                this.v$.link.title.$touch()            
+                return
+            }            
+            if (this.v$.link.src.$invalid) {
+                this.v$.link.src.$touch()
+                return
+            }   
             await this.$store.dispatch('saveLink', this.link)
-            this.link.title = ''
-            this.link.src = ''
+            this.link = {}
+            //this.link.title = ''
+            //this.link.src = ''
             this.isFormOpen = false
         },
     },        
@@ -104,17 +158,31 @@ export default {
     width: 100%;
     height: 38px;
     margin-bottom: 8px;
+    border-radius: 5px;
     input {
+        border-radius: 5px;
         font-size: 22px;        
         width: 100%;
         height: 100%;
         margin-right: 8px;
         padding: 0 8px;
-    }   
+    }  
+}
+.invalid {
+    border: 1px solid red;
+    color: red;
+} 
+.error-item {
+    height: 38px;
+    margin-top: -10px;    
 }
 input::placeholder { /* Most modern browsers support this now. */
    color:    rgb(127, 127, 127);
    font-size: 18px;
+}
+.error {
+    font-size: 13px;
+    color: red;
 }
 .submit-item {
     width: 100%;

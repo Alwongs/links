@@ -73,11 +73,13 @@ export default {
         switchLang() {
             if (this.$i18n.locale === 'en') {
                 this.$i18n.locale = 'ru'
+                localStorage.setItem('local', 'ru')
                 this.lang = 'ru'
                 return                
             }
             if (this.$i18n.locale === 'ru') {
                 this.$i18n.locale = 'en' 
+                localStorage.setItem('local', 'en')
                 this.lang = 'en'                
                 return                                 
             }

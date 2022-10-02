@@ -59,7 +59,7 @@ export default {
             } else if (this.width < 1023 && this.width >= 768) {
                 return value.substring(0, this.width / 30) + '...'
             } else if (this.width < 768) {
-                return value.substring(0, this.width / 19) + '...'
+                return value.substring(0, this.width / 17) + '...'
             }
         },
         async deleteLink(link) {
@@ -86,7 +86,7 @@ export default {
         font-size: 22px;
         //flex: 0 0 auto;        
         margin-right: 24px;
-        padding: 0 5px;       
+        //padding: 0;       
         cursor: pointer;        
         &:hover  {
             color: red;
@@ -102,7 +102,7 @@ export default {
             width: 24px;
             margin-right: 4px; 
             @media (max-width: $mobile-max) {
-                margin-right: 2px;
+                display: none;
             }                              
         } 
         @media (max-width: $mobile-max) {
