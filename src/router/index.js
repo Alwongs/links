@@ -16,22 +16,21 @@ const routes = [
         path: '/login',
         name: 'login',
         component: () => import('@/views/LoginPage.vue'),
-      },
-      {
+    },
+    {
         path: '/register',
         name: 'register',
         component: () => import('@/views/RegisterPage.vue'),
-      },       
-      {
+    },       
+    {
         path: '/404',
         name: '404',
         component: () => import('@/views/NotFoundPage.vue'),
-      },       
-      {
+    },       
+    {
         path: '/:pathMatch(.*)*',
         component: () => import('@/views/NotFoundPage.vue'),
-      },  
-
+    },  
 ]
 
 const router = createRouter({

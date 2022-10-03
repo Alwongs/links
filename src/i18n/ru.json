@@ -12,8 +12,8 @@
     "profile": "Профиль",
     "language": "Язык",
     "manage_your_links": "Управляйте своими ссылками",
-    "en": "Анг",
-    "ru": "Рус",
+    "en": "АНГ",
+    "ru": "РУС",
     "email": "email",
     "password": "пароль",
     "link_title": "название",
@@ -21,8 +21,9 @@
     "close": "Закрыть",
     "do_not_have_account": "Еще не зарегистрированы?",
     "already_have_account": "Уже есть регистрация?",
-    "push_menu_on_panel_to_login": "Откройте меню на панели чтобы войти",
-    "wrong_url": "Ссылка должна начинаться с 'from http://' или 'https://'",
+    "you_are_not_authorized": "Вы не авторизованы. Войдите если у вас есть аккаунт или пройдите регистрацию",
+    "wrong_url": "Некорректная ссылка",
     "min_number_of_letters": "Минимальное количество символов: ",
-    "field_should_be_filled": "Поле не должно быть пустым"
+    "field_should_be_filled": "Поле не должно быть пустым",
+    "select_category": "Выберете категорию для просмотра ссылок"
 }

@@ -139,6 +139,7 @@ export default {
 }
 .nav-item {
     padding: 16px;
+    border-bottom: 1px solid rgb(66, 128, 178);
     cursor: pointer;
     &:hover {
         background-color: rgb(68, 162, 213);

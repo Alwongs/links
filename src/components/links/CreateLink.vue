@@ -53,7 +53,16 @@
                 :key="error.$uid"            
                 class="error-item"
             >
-                <small class="error">
+                <small
+                    v-if="error.$params.type == 'url'" 
+                    class="error"
+                >
+                    {{ $t('wrong_url') }}
+                </small> 
+                <small
+                    v-else 
+                    class="error"
+                >
                     {{ error.$message }}
                 </small> 
             </li>
@@ -116,12 +125,11 @@ export default {
             }            
             if (this.v$.link.src.$invalid) {
                 this.v$.link.src.$touch()
+                console.log(this.v$.link.src)
                 return
             }   
             await this.$store.dispatch('saveLink', this.link)
             this.link = {}
-            //this.link.title = ''
-            //this.link.src = ''
             this.isFormOpen = false
         },
     },        

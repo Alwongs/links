@@ -2,6 +2,7 @@
     <aside class="app-aside">
         <create-category />
         <h2 
+            :class="{'arrow-right': !isListOpen, 'arrow-down': isListOpen}"
             class="title"
             @click="toggleList"
         >
@@ -56,18 +57,40 @@ export default {
     font-size: 24px;
     font-weight: 500;
     text-align: center;
-    padding: 32px 0 8px 0;
-    @media (min-width: $desktop-min) and (max-width: $desktop-max) {
-
-    }     
-    @media (min-width: $tablet-min) and (max-width: $tablet-max) {
-
-    }     
+    padding: 32px 0 8px 0;    
     @media (max-width: $mobile-max) {
         font-size: 26px;
-        cursor: pointer;        
+        cursor: pointer;       
     }      
 }
+
+@mixin arrow-icon($duration) {
+    display: inline-flex;
+    content: '';
+    background-image: url('~@/assets/img/svg/arrow_right.svg');
+    background-size: contain;
+    background-repeat: no-repeat; 
+    height: 24px;
+    width: 24px; 
+    transition: $duration;    
+    @media (min-width: $mobile-max) {
+        display: none;
+    }             
+}
+.arrow-right {
+    &:after {
+        @include arrow-icon(0.5s);        
+        background-position: 4px 5px;            
+    }        
+}
+.arrow-down { 
+    &:after {
+        @include arrow-icon(0.3s);
+        background-position: 6px -4px;
+        transform: rotate(90deg);               
+    }        
+}
+
 .list-wrap {
     @media (max-width: $mobile-max) {
         overflow: hidden;
