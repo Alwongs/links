@@ -12,13 +12,13 @@
 
             <ul class="link-list">
                 <li 
-                    v-if="!getCategory.links"
+                    v-if="!getCategoryFilter.links"
                     class="no-items"
                 >
                     Link list is empty..
                 </li>
                 <link-item 
-                    v-for="(link, index) in getCategory.links"
+                    v-for="(link, index) in getCategoryFilter.links"
                     :key="link.id"
                     :link="link"
                     :number="index"
@@ -49,7 +49,10 @@ export default {
         },        
         getCategory() {
             return this.$store.getters.getCategory
-        },       
+        },    
+        getCategoryFilter() {
+            return this.$store.getters.getCategoryFilter
+        },            
     },
     async mounted() {
         if (!this.$store.getters.getCategoryList.length) {

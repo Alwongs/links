@@ -52,11 +52,14 @@ export default {
                 this.$router.push('/')
             }
         },
+
         showCategory(category) {
             this.$emit('closeList')            
             this.$router.push({name: 'links-page', params: {id: category.id}}) 
             this.$store.commit('UPDATE_CATEGORY', category); 
+            this.$store.commit('UPDATE_CATEGORY_FILTER', category); 
         },
+
         async saveCategory() {
             await this.$store.dispatch('saveCategory', {
                 name: this.categoryName

@@ -8,10 +8,14 @@ export default {
         getCategory(state) {
             return state.category;
         },
+        getCategoryFilter(state) {
+            return state.categoryFilter;
+        },
     },
     state: {
         categoryList: [],
-        category: {}
+        category: {},
+        categoryFilter: {}
     },
     mutations: {
         UPDATE_CATEGORY_LIST(state, payload) {
@@ -19,6 +23,9 @@ export default {
         },
         UPDATE_CATEGORY(state, payload) {
             state.category = payload
+        },
+        UPDATE_CATEGORY_FILTER(state, payload) {
+            state.categoryFilter = payload
         },
     },
     actions: {
@@ -41,6 +48,7 @@ export default {
                 if (data.exists()) {
                     const category = data.val()                      
                     commit('UPDATE_CATEGORY', category);
+                    commit('UPDATE_CATEGORY_FILTER', category);
                     commit('SET_LOADING', false);
                 } else {
                     commit('UPDATE_CATEGORY', {})
