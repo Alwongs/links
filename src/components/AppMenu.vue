@@ -9,7 +9,14 @@
                     class="nav-item"
                     @click="switchLang"
                 >
-                    {{ $t('language') + ': ' + $t(lang)  }} 
+                    <span
+                        :class="{
+                            eng: $i18n.locale == 'en', 
+                            rus: $i18n.locale == 'ru'
+                        }"
+                    >
+                        {{ $t('language') }}
+                    </span> 
                 </li>
 
                 <li 
@@ -137,12 +144,38 @@ export default {
 .nav-list {
     font-size: 22px;      
 }
+@mixin arrow-icon() {
+    display: inline-flex;
+    content: '';
+    background-size: contain;
+    background-repeat: no-repeat; 
+    height: 32px;
+    width: 32px;                   
+}
 .nav-item {
     padding: 16px;
     border-bottom: 1px solid rgb(66, 128, 178);
     cursor: pointer;
     &:hover {
         background-color: rgb(68, 162, 213);
-    }    
+    }   
+    .eng {
+
+        &:after {
+            @include arrow-icon();        
+            background-image: url('~@/assets/img/png/us_flag.png');           
+        } 
+    } 
+    .rus {
+        width: fit-content;
+        border: 1px solid red;
+        &:after {
+            margin-left: 16px;
+            margin-top: 8px;
+            border: 1px solid red;
+            @include arrow-icon();
+            background-image: url('~@/assets/img/png/rus_flag.png');               
+        }   
+    }
 }
 </style>

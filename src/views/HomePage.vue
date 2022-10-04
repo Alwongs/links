@@ -23,13 +23,13 @@
                 class="btn login-link" 
                 @click="$router.push({name: 'login'})"
             >
-                Войти
+                {{ $t('login') }}
             </button>
             <button 
                 class="btn register-link"
                 @click="$router.push({name: 'register'})"
             >
-                Регистрация
+                {{ $t('register') }}
             </button>
         </div>
     </div>

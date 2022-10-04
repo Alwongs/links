@@ -141,13 +141,11 @@ export default {
 .form {
     background-color: rgba(255, 233, 206, 0.7);
     box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.3);
-    padding: 34px;
+    padding: 36px;
     border-radius: 0 0 10px 0;
     width: 50%;
-
     transition: 0.4s;
-    margin-top: -207px;
-
+    margin-top: -232px;
     &.active {
         margin-top: 0;
     }   
@@ -159,6 +157,7 @@ export default {
     }     
     @media (max-width: $mobile-max) {
         width: 100%; 
+        padding: 36px 16px;
         border-radius: 0;        
     }       
 }
@@ -175,6 +174,9 @@ export default {
         margin-right: 8px;
         padding: 0 8px;
     }  
+    @media (max-width: $mobile-max) {
+        height: 44px;        
+    } 
 }
 .invalid {
     border: 1px solid red;
@@ -196,6 +198,9 @@ input::placeholder { /* Most modern browsers support this now. */
     width: 100%;
     height: 38px;
     text-align: end;
+    @media (max-width: $mobile-max) {
+        height: 44px;        
+    } 
 }    
 .submit {
     font-size: 22px;          
