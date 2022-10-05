@@ -23,6 +23,7 @@ export default {
     left: 0;
     top: 0;
     height: 36px;
+    overflow: hidden;
     line-height: 34px;
     border-radius: 0 0 10px 0;
     background-color: rgba(255, 233, 206, 0.7);
@@ -32,9 +33,10 @@ export default {
     padding: 0 14px;
     margin-bottom: 16px;
     cursor: pointer;
+    transition: height 0.2s;
     &:hover {
         line-height: 38px;        
-        height: 36px;        
+        height: 38px;             
     }
 }
 </style>

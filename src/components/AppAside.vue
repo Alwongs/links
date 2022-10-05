@@ -1,6 +1,6 @@
 <template>
     <aside class="app-aside">
-        <create-category />
+        <create-category v-if="isListOpen"/>
         <h2 
             :class="{'arrow-right': !isListOpen, 'arrow-down': isListOpen}"
             class="title"
@@ -79,7 +79,7 @@ export default {
 }
 .arrow-right {
     &:after {
-        @include arrow-icon(0.5s);        
+        @include arrow-icon(0.3s);        
         background-position: 4px 5px;            
     }        
 }
@@ -95,7 +95,7 @@ export default {
     @media (max-width: $mobile-max) {
         overflow: hidden;
         max-height: 0;     
-        transition: max-height 1s ease-in-out;           
+        transition: max-height 0.5s ease-in-out;           
         &.active {
             max-height: 1000px;       
         }          

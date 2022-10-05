@@ -25,5 +25,6 @@
     "wrong_url": "Wrong URL",
     "min_number_of_letters": "Minimal number of letters: ",
     "field_should_be_filled": "The field should be filled",
-    "select_category": "Select category to view links"
+    "select_category": "Select category to view links",
+    "clear": "Clear"
 }

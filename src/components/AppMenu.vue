@@ -54,20 +54,18 @@
 
                 <li 
                     v-if="isUserAuthenticated"
-                    class="nav-item input-item"
+                    class="nav-item search-item"
                 >
                     <input 
                         v-model.trim="searchText"
                         type="text" 
                         placeholder="Search"
-                        @change="changeSearch"
                     > 
                     <button 
                         class=""
-                        @click="search"
-                    >
-                        Find
-                    </button>
+                        @click="clearSearch"
+                        :title="$t('clear')"
+                    ></button>
                 </li>
             </ul>                
         </nav>
@@ -97,9 +95,14 @@ export default {
             return this.$store.getters.getCategoryFilter
         },         
     }, 
+    watch: {
+        searchText: function() {
+            this.search()
+        }
+    },    
     methods: {
-        changeSearch() {
-
+        clearSearch() {
+            this.searchText = ''
         },
         search() {
             const links = this.getCategory.links
@@ -162,20 +165,19 @@ export default {
     position: absolute;
     right: 0;
     top: 0;
-    background-color: rgb(58, 138, 182);
+    background-color: rgba(58, 138, 182, .9);
     width: 400px;
     padding-top: 64px;
     border-radius: 0 0 0 5px;
     color: white;
-    a {
-        color: white;
-    }
     transition: 0.4s;
     transform: translateY(-100%);  
+    a {
+        color: white;
+    }    
     &.active {
         transform: translateY(0%);
     } 
-
     @media (min-width: $desktop-min) and (max-width: $desktop-max) {
         width: 350px;
     }     
@@ -198,20 +200,34 @@ export default {
         background-color: rgb(68, 162, 213);
     }   
 }
-.input-item {
+.search-item {
+        display: flex;
+        align-items: center;
+        padding: 9px 16px;
     input {
         padding-left: 8px;
+        margin-right: 8px;
         font-size: 16px;
-        width: 80%;
-        height: 34px;
+        flex: 1;
+        height: 44px;
         outline: none;
         &::placeholder {
             color: grey;
         }
     }
     button {
-        height: 34px;
-        padding: 0 4px;
+        background-image: url('~@/assets/img/svg/reset.svg');
+        background-repeat: no-repeat; 
+        background-size: 24px;  
+        background-position: 50% 50%;     
+        font-size: 18px;
+        height: 42px;
+        width: 42px;
+        padding: 16px;
+        border: none;
+        box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.4);
+        border-radius: 50%;
+        cursor: pointer;
     }
 }
 

@@ -1,10 +1,5 @@
 <template>
     <div class="app-page">
-<!--        
-        <h1 class="title">
-            {{ $t('manage_your_links') }}..
-        </h1>
--->
         <p 
             v-if="isUserAuthenticated" 
             class="notification"

@@ -1,81 +1,88 @@
 <template>
-    <form-trigger 
-        :isFormOpen="isFormOpen"
-        :title="$t('new_link')"
-        :zIndex="1"
-        @toggleForm="toggleForm"
-    />
-    <form    
-        class="form"
-        :class="{active: isFormOpen}"
-        @submit.prevent="saveLink"
-    >
-
-        <ul class="input-list">
-            <li class="input-item">
-                <input 
-                    v-model="link.title" 
-                    type="text" 
-                    :placeholder="$t('link_title')"
-                    :class="{ invalid: (v$.link.title.$dirty && v$.link.title.$error) }"                     
-                >
-            </li>
-            <li 
-                v-for="error of v$.link.title.$errors"
-                :key="error.$uid"            
-                class="error-item"
+    <div class="create-link">
+        <form-trigger 
+            :isFormOpen="isFormOpen"
+            :title="$t('new_link')"
+            :zIndex="1"
+            @toggleForm="toggleForm"
+        />
+        <div
+            :class="{active: isFormOpen}"  
+            class="modal"
+        >
+            <h2 class="modal-title">Новая категория</h2>     
+            <form    
+                class="form"
+                @submit.prevent="saveLink"
             >
-                <small 
-                    v-if="error.$params.type == 'minLength'" 
-                    class="error"
-                >
-                    {{ $t('min_number_of_letters') }} {{ error.$params.min }}
-                </small> 
-                <small 
-                    v-else-if="error.$params.type == 'required'" 
-                    class="error"
-                >
-                    {{ $t('field_should_be_filled') }}
-                </small> 
-            </li>
+
+                <ul class="input-list">
+                    <li class="input-item">
+                        <input 
+                            v-model="link.title" 
+                            type="text" 
+                            :placeholder="$t('link_title')"
+                            :class="{ invalid: (v$.link.title.$dirty && v$.link.title.$error) }"                     
+                        >
+                    </li>
+                    <li 
+                        v-for="error of v$.link.title.$errors"
+                        :key="error.$uid"            
+                        class="error-item"
+                    >
+                        <small 
+                            v-if="error.$params.type == 'minLength'" 
+                            class="error"
+                        >
+                            {{ $t('min_number_of_letters') }} {{ error.$params.min }}
+                        </small> 
+                        <small 
+                            v-else-if="error.$params.type == 'required'" 
+                            class="error"
+                        >
+                            {{ $t('field_should_be_filled') }}
+                        </small> 
+                    </li>
 
 
-            <li class="input-item">
-                <input 
-                    v-model="link.src" 
-                    type="text" 
-                    :placeholder="$t('link_src')"  
-                    :class="{ invalid: (v$.link.src.$dirty && v$.link.src.$error) }"            
-                >                  
-            </li>
-            <li 
-                v-for="error of v$.link.src.$errors"
-                :key="error.$uid"            
-                class="error-item"
-            >
-                <small
-                    v-if="error.$params.type == 'url'" 
-                    class="error"
-                >
-                    {{ $t('wrong_url') }}
-                </small> 
-                <small
-                    v-else 
-                    class="error"
-                >
-                    {{ error.$message }}
-                </small> 
-            </li>
+                    <li class="input-item">
+                        <input 
+                            v-model="link.src" 
+                            type="text" 
+                            :placeholder="$t('link_src')"  
+                            :class="{ invalid: (v$.link.src.$dirty && v$.link.src.$error) }"            
+                        >                  
+                    </li>
+                    <li 
+                        v-for="error of v$.link.src.$errors"
+                        :key="error.$uid"            
+                        class="error-item"
+                    >
+                        <small
+                            v-if="error.$params.type == 'url'" 
+                            class="error"
+                        >
+                            {{ $t('wrong_url') }}
+                        </small> 
+                        <small
+                            v-else 
+                            class="error"
+                        >
+                            {{ error.$message }}
+                        </small> 
+                    </li>
 
-            <li class="input-item submit-item">
-                <input 
-                    type="submit" 
-                    value="Save" 
-                    class="submit"
-                >
-            </li>
-        </ul>
-    </form> 
+                    <li class="input-item submit-item">
+                        <input 
+                            type="submit" 
+                            value="Save" 
+                            class="submit"
+                        >
+                    </li>
+                </ul>
+            </form> 
+        </div>
+    </div>
 </template>
 
 <script>
@@ -138,14 +145,14 @@ export default {
 
 <style lang="scss" scoped>
 
-.form {
+.modal {
     background-color: rgba(255, 233, 206, 0.7);
     box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.3);
-    padding: 36px;
+    padding: 0 16px 24px 16px;
     border-radius: 0 0 10px 0;
     width: 50%;
     transition: 0.4s;
-    margin-top: -232px;
+    margin-top: -240px;
     &.active {
         margin-top: 0;
     }   
@@ -157,17 +164,23 @@ export default {
     }     
     @media (max-width: $mobile-max) {
         width: 100%; 
-        padding: 36px 16px;
+        margin-top: -254px;        
         border-radius: 0;        
-    }       
+    }
+}
+.modal-title {
+    font-size: 24px;
+    padding: 16px 0;
+    text-align: center;
+}
+.form {
+       
 }
 .input-item {
     width: 100%;
     height: 38px;
     margin-bottom: 8px;
-    border-radius: 5px;
     input {
-        border-radius: 5px;
         font-size: 22px;        
         width: 100%;
         height: 100%;
@@ -175,7 +188,7 @@ export default {
         padding: 0 8px;
     }  
     @media (max-width: $mobile-max) {
-        height: 44px;        
+        height: 48px;        
     } 
 }
 .invalid {

@@ -80,7 +80,7 @@ export default {
 .title {
     font-size: 28px;    
     text-align: center;
-    margin-bottom: 32px;
+    padding: 32px;
     @media (max-width: $mobile-max) {
         font-size: 26px; 
     }  
