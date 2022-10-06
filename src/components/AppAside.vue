@@ -1,6 +1,6 @@
 <template>
     <aside class="app-aside">
-        <create-category v-if="isListOpen"/>
+        <create-category class="create-category-trigger" :class="{ hidden: !isListOpen }"/>
         <h2 
             :class="{'arrow-right': !isListOpen, 'arrow-down': isListOpen}"
             class="title"
@@ -48,6 +48,13 @@ export default {
 
 <style lang="scss" scoped>
 
+.create-category-trigger {
+    @media (max-width: $mobile-max) {
+        &.hidden {
+            display: none;
+        }
+    }     
+}
 .app-aside {
     z-index: 4;
     background-color: rgb(207, 234, 223);
@@ -59,8 +66,9 @@ export default {
     text-align: center;
     padding: 32px 0 8px 0;    
     @media (max-width: $mobile-max) {
+        //padding: 8px 0 8px 0;         
         font-size: 26px;
-        cursor: pointer;       
+        cursor: pointer;     
     }      
 }
 

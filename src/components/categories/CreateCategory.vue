@@ -2,14 +2,16 @@
     <div class="create-category">
         <form-trigger 
             :isFormOpen="isFormOpen"
-            :title="$t('new_сategory')" 
+            :title="$t('add_сategory')" 
             @toggleForm="toggleForm"
         />
         <div
             :class="{active: isFormOpen}"  
             class="modal"
         >
-            <h2 class="modal-title">Новая категория</h2> 
+            <h2 class="modal-title">
+                {{ $t('new_category') }}
+            </h2> 
             <form  
                 class="form"      
                 @submit.prevent="saveCategory"

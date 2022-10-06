@@ -2,7 +2,7 @@
     <div class="create-link">
         <form-trigger 
             :isFormOpen="isFormOpen"
-            :title="$t('new_link')"
+            :title="$t('add_link')"
             :zIndex="1"
             @toggleForm="toggleForm"
         />
@@ -10,7 +10,9 @@
             :class="{active: isFormOpen}"  
             class="modal"
         >
-            <h2 class="modal-title">Новая категория</h2>     
+            <h2 class="modal-title">
+                {{ $t('new_link') }}
+            </h2>    
             <form    
                 class="form"
                 @submit.prevent="saveLink"

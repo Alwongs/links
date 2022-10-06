@@ -3,9 +3,9 @@
     "login": "Login",
     "logout": "Logout",
     "categories": "Categories",
-    "new_сategory": "New Category",
+    "add_сategory": "Add Category",
+    "add_link": "Add Link",
     "links": "Links",
-    "new_link": "New Link",
     "save": "Save",
     "update": "Update",
     "delete": "Delete",
@@ -26,5 +26,8 @@
     "min_number_of_letters": "Minimal number of letters: ",
     "field_should_be_filled": "The field should be filled",
     "select_category": "Select category to view links",
-    "clear": "Clear"
+    "clear": "Clear",
+    "reset": "Reset",
+    "new_category": "New category",
+    "new_link": "New Link"    
 }

@@ -64,7 +64,7 @@
                     <button 
                         class=""
                         @click="clearSearch"
-                        :title="$t('clear')"
+                        :title="$t('reset')"
                     ></button>
                 </li>
             </ul>                
@@ -106,10 +106,8 @@ export default {
         },
         search() {
             const links = this.getCategory.links
-
             const linksArray = Object.keys(links).map(key => ({...links[key], id: key}))
             let newAarray = []            
-
             linksArray.map(link => {
                 if(link.title.toLowerCase().includes(this.searchText.toLowerCase())) {
                     newAarray.push(link)
@@ -123,22 +121,18 @@ export default {
         goTo(path) {
             this.$router.push(path);
             this.$store.commit('TOGGLE_ASIDE')            
-        },          
+        },
         switchLang() {
             if (this.$i18n.locale === 'en') {
                 this.$i18n.locale = 'ru'
                 localStorage.setItem('local', 'ru')
-                this.lang = 'ru'
-                this.$store.commit('TOGGLE_ASIDE') 
-                return                
+                return                  
             }
             if (this.$i18n.locale === 'ru') {
                 this.$i18n.locale = 'en' 
-                localStorage.setItem('local', 'en')
-                this.lang = 'en'    
-                this.$store.commit('TOGGLE_ASIDE')                             
-                return                                 
-            }
+                localStorage.setItem('local', 'en') 
+                return                                
+            }          
         },
         logout() {
             if (confirm('Вы уверены?')) {
